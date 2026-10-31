@@ -1,4 +1,4 @@
-# Mala for Hector — public beta candidate
+# Mala for Hector — public beta
 
 Mala is a community granular texture processor for **Hector running firmware 407**,
 based on the open-source Beads algorithms by Emilie Gillet / Mutable Instruments.
@@ -36,7 +36,7 @@ The initial public installer accepts **unmodified stock 407**. It refuses older
 private Mala installs, other community UI modifications, Beebo, and unknown files
 rather than overwriting them. See [compatibility and limitations](docs/KNOWN-LIMITATIONS.md).
 
-## Candidate validation status
+## Beta validation status
 
 The same ARM DSP binary has prior Hector use and ARM emulation evidence. The
 footer has been installed and physically confirmed by the owner on Hector.
@@ -58,3 +58,6 @@ with [Build from source](docs/BUILDING.md) and the [technical design](docs/INSTA
 Mala is an independent community project, not an official Poly Effects or Mutable
 Instruments release. Original design and DSP credit belong to Emilie Gillet and
 the upstream contributors. See [credits](CREDITS.md) and [licensing](docs/LICENSING.md).
+
+The Hector adaptation was developed by jahmontee / Poly Hector with AI development
+assistance from OpenAI Codex.

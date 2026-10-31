@@ -1,6 +1,6 @@
 # Mala 0.1.0-beta.6 — Hector firmware 407
 
-Community beta candidate for willing testers. Based on the open-source Beads DSP
+Community beta for willing testers. Based on the open-source Beads DSP
 by Emilie Gillet / Mutable Instruments, adapted for Hector's patching environment.
 
 Includes four recording qualities, Freeze and Seed, CV modulation, wavetable
@@ -34,3 +34,8 @@ established. See docs/VALIDATION.md for the exact evidence and remaining coverag
 Report reproducible issues using the repository's bug-report template. Source,
 credits, license texts, build instructions and contribution guidance are included.
 This is an independent community project, not an official vendor release.
+
+Original Beads design and DSP: **Emilie Gillet / Mutable Instruments**. Hector
+adaptation and project direction: **jahmontee / Poly Hector**, with **OpenAI Codex**
+acknowledged for AI development assistance with implementation, testing tools,
+documentation and packaging. Full upstream acknowledgments are in CREDITS.md.

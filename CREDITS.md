@@ -17,6 +17,12 @@ redistributed here.
 **Mala host adapter, touchscreen editor, CV handling, frozen-buffer integration,
 and release tooling:** Beebo / Hector Lab contributors, 2026.
 
+**Project direction, feature decisions and physical Hector testing:** jahmontee /
+Poly Hector.
+
+**AI development assistance:** OpenAI Codex assisted with the Hector adaptation,
+touchscreen implementation, testing tools, documentation and release packaging.
+
 **Slider placement:** The Qt Company, Qt Quick Controls 2 Material Slider; its
 complete notice and applicable GPL/LGPL texts are included. Other Qt classes are
 used from Hector's existing installation; Qt libraries are not shipped.

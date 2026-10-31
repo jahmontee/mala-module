@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0-beta.6 — public beta candidate
+## 0.1.0-beta.6 — public beta
 
 - Back moved left of Module Settings; module Bypass occupies its former position
   and reflects the host's acknowledged enabled state.

@@ -1,7 +1,7 @@
 # USB installation — Mala 0.1.0-beta.6
 
 For Hector, unmodified firmware 407. Beebo and other firmware versions are not
-supported by this installer. This is a beta candidate; read KNOWN-LIMITATIONS.md.
+supported by this installer. This is a beta release; read KNOWN-LIMITATIONS.md.
 Installation, automatic post-reboot verification and rollback passed on one
 Hector using a pre-Mala407 SD backup with existing internal settings/presets.
 This was not a fresh vendor-download flash; see VALIDATION.md for the test scope.

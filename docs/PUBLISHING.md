@@ -1,19 +1,18 @@
 # Publishing on GitHub
 
-A public repository can host source, forks, pull requests and issue reports.
-Use GitHub Releases for the USB downloads and mark this release as a prerelease.
-The repository name used locally is `mala-hector`; the account/name can be chosen
-when publishing. No GitHub repository, external upload or release has been created
-by this preparation.
+The public repository is [poly-hector/mala-module](https://github.com/poly-hector/mala-module),
+with source, forks, pull requests and issue reports. Use GitHub Releases for the
+USB downloads and mark beta releases as prereleases. The local source directory
+and download prefix remain `mala-hector`.
 
 1. Review this standalone source tree. Its history must start here; do not import
    the private lab repository/history, ignored build directories or device records.
-2. Create the chosen public repository with Issues enabled. Add the source and
-   existing license, credits, CONTRIBUTING, issue/PR templates and CI workflow.
+2. Keep Issues enabled and include the source, existing license, credits,
+   CONTRIBUTING, issue/PR templates and CI workflow.
    Contributors can fork and propose PRs; they do not need direct write access.
 3. Let CI build native DSP and run the disposable tests/audit. Review all logs
-   before publishing the release downloads. GitHub CI is configured here but has
-   not run remotely; local checks do not count as a GitHub Actions run.
+   before publishing the release downloads. Require a successful GitHub Actions
+   run for the exact release source commit; local checks do not replace that run.
 4. Review the completed one-unit USB install/reboot/rollback evidence and the
    remaining coverage in VALIDATION.md. State the actual pre-Mala407 backup-card
    baseline and its limits in the prerelease; do not call it a fresh vendor-flash
