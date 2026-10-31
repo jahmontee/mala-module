@@ -1,0 +1,10 @@
+name: Feature request
+description: Suggest a focused improvement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like to do?
+      description: Explain the musical or usability need and the expected behavior.
+    validations:
+      required: true

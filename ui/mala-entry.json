@@ -1,0 +1,16 @@
+{
+  "schema": "beebo-hector-lab/module-browser/1",
+  "integration_status": "Integrated in the local full-library UI with native Mala and silent proxies for other modules",
+  "effect_type": "mala",
+  "display_name": "Mala",
+  "uri": "urn:beebo-hector-lab:mala-preview",
+  "category": 3,
+  "tags": ["ported", "time effects"],
+  "description": "Granular texture processor based on Mutable Instruments Beads, with four recording qualities, CV modulation, Seed and Freeze.",
+  "long_description": "Original Beads design and open-source algorithms by Emilie Gillet / Mutable Instruments. Mala LV2 adaptation and touchscreen editor by Beebo / Hector Lab contributors. The local preview is still being developed toward the original module's functionality and I/O.",
+  "credits": [
+    "Beads and stmlib: Emilie Gillet / Mutable Instruments",
+    "Mala LV2 adaptation and Qt editor: Beebo / Hector Lab contributors"
+  ],
+  "license": "MIT; preserve original source and bundle notices"
+}

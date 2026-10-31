@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0-beta.6",
+  "product": "Mala",
+  "hardware": "Hector",
+  "firmware": "407",
+  "architecture": "aarch64",
+  "sample_rate": 48000,
+  "ports": 58,
+  "plugin_uri": "urn:beebo-hector-lab:mala-preview",
+  "public_ui_commit": "9d83f1a3105de182d83af0580e4cb1afec00f978",
+  "accepted_arm_plugin_sha256": "bab3b47378f314227e6be8f1736e68b86861df0dd3eacb1e90fd7c988499f80b",
+  "stock_sha256": {
+    "home/debian/UI/show_widget.py": "135e3fc0b8d7120afb77a442c7cc3d204a98017b4f0b0d4bb2a0db8512600654",
+    "home/debian/UI/module_info.py": "86171480bf644feccecda7de518fb21953a2b8c34343f40d5386d012ea15a0be",
+    "home/debian/UI/ingen_wrapper.py": "63ce37cb478b6a6b2c3bd18cc29753fd98d04bcc871a8c29ca1490560861db03",
+    "home/debian/UI/qml/PatchBayEffect.qml": "9c90fd898c70919dd1944efa9de455c7da40779b86cbd414c3256829a8434bef",
+    "home/debian/UI/qml/TitleFooter.qml": "7ec2766281a954a03f4e7ab05f5b9a1040e01f092858ff6cb30621aff59e4da3",
+    "home/debian/UI/qml/ModuleBrowser.qml": "ade695a162da0090010fdc80abb0a82ec644f695608a1827f063fccc24a27b2e",
+    "home/debian/UI/qml/PatchBay.qml": "82274d5de9bc9a5a9e6bb6797ef237aa8746e36adb3f80f7214b3b39b75b14a8",
+    "home/debian/UI/qml/ValueButtonsSlider.qml": "9d1f50585a26a103bf5d76aa76c074399566b3912c291760355a83b98d0719fd",
+    "home/debian/UI/qml/MultiValueButtonsSlider.qml": "65a34b3f2245b091d81f73eedd46fdf16c627f7deb8ec1cc8e7847dc183c52e7",
+    "home/debian/UI/qml/ModuleMore.qml": "7d8bf085386d9dcfedc394bf0add31a11f7591db318f157e306d03ebfbd287b1",
+    "home/debian/UI/qml/Spotlight.qml": "bc7788bb943cb5ffd3ff354d12d31d9221090575ee431ceab126c27b1ecdc3d0"
+  },
+  "guards": {
+    "home/debian/UI/qml/module_info.js": "7e5eb952ae1e7c008869e6eb0f8a346f8ca5831c4dc3e439a8cceb76be3cac20",
+    "etc/systemd/system/debug_script.service": "a26ccdcbe6abdf2aeffb74efb7000c4f9d7fd7d81a8efd17544fbe89d7ab2d73",
+    "usr/bin/usb_startup_debug.sh": "7791a6575782bd7b88bbe26add12b52108fc0aa857538bb81b381ddf38bfd5ff",
+    "etc/systemd/system/jack.service": "a2688c386280ca3568a19a34614e8aee37c0a68169e256d5c3e93d4ec5c1f967",
+    "usr/bin/start_beebo.sh": "31cd339db2dba0849b8bc6c2cd12cb76a00bbf81250f0846a1f3c6cc0f22d346"
+  }
+}

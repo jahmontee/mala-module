@@ -1,0 +1,7 @@
+@prefix lv2: <http://lv2plug.in/ns/lv2core#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+<urn:beebo-hector-lab:mala-preview> a lv2:Plugin ; lv2:binary <mala.so> ; rdfs:seeAlso <mala.ttl> .
