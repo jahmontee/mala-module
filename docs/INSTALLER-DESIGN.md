@@ -1,38 +1,30 @@
-# Installer design and review boundaries
+# Coordinated USB revision2 design
 
-The FAT32 kit's `debug.sh` uses firmware 407's existing debug startup service. It
-checks the two executable Python sources against hashes embedded in the launcher,
-then starts the USB entrypoint. The entrypoint refuses desktops and Beebo, enters
-PID1's mount namespace, and verifies board, model, firmware-source hashes, visible
-and persistent files, overlay layout, package ownership, USB mount and free space.
-There is no default password, SSH identity, network setup or embedded unit serial.
+Firmware407 runs debug.sh through existing USB startup support. No download or
+system dependency installation is required.
 
-Admission is followed by a root-owned capture under `/mnt/mala-public-beta/` and
-a transient systemd worker independent of the USB debug service and frontend.
-Only that captured worker can pause screen/audio services and remount the lower
-firmware tree. Temporary RAM service drop-ins prevent automatic consumer restarts;
-they disappear during the ordinary reboot. No persistent startup service is added.
+The exact catalog has eight optional v2 installed sets and four additional
+beta.6 upgrade sets. Transitions enumerate allowed targets, guard unchanged
+component files and metadata, validate content-addressed payloads and capture
+a complete worker before pausing services. Workers recheck device/boot/USB,
+saved data, preimages and guards before writing.
 
-Before a target write, the worker stores all actual originals and their metadata,
-a device binding, transaction ID, and an HMAC-authenticated durable journal. It
-verifies those backups before publication. Target changes are atomic per file,
-with fsync and recorded intent; the complete 34-file update is not a filesystem-wide
-atomic operation. Exceptions attempt restoration of known states; unknown file
-edits or metadata changes refuse restoration. Added directories are removed only
-when recorded and empty. Presets and unrelated files are never deletion targets.
+Authenticated original bytes/metadata are durable before publication. Services
+pause, firmware becomes writable, per-file atomic writes publish the change,
+then exact installed state verifies. Firmware closes read-only or remains
+paused for normal reboot closeout. Next startup verifies bytes, metadata and
+read-only firmware. Repeated matching USB use is verification-only.
 
-After verifying the installed/restored lower tree, the worker syncs and attempts
-read-only closeout. The known stock407 synced-EBUSY remount condition is recorded
-as requiring normal reboot, with consumers still paused. It never treats another
-mount error as success. The next USB boot verifies read-only state and visible
-files, without repeating a committed install or completed rollback.
+The shared inventory and outcomes are HMAC/device-bound. Migration admits only
+the explicit prior catalog digest, its exact mapped state, known component
+identities and matching authenticated latest transaction. Older unfinished
+operations require the original recovery kit. Old backups remain private.
 
-A root-owned reservation prevents concurrent workers. Rollback can retire a
-stale reservation only after verifying its service is inactive/failed. A running
-worker is not interrupted. Backups are retained after rollback. A deliberate
-later installation can create a fresh transaction after matching stock preimages.
+Mala updates retain the URI and ports. Independent removal composes shared UI
+for remaining recognized modules. Interrupted recovery restores exact originals.
+Completed-version downgrade is separate. Recovery blocks automatic retry until
+acknowledgement with the opposite matching kit. Unknown edits/metadata, links,
+overlay shadows, wrong mounts and corrupt payloads are refused.
 
-Cryptographic checks protect package integrity and local journal consistency;
-they are not a publisher signature or protection from an attacker with root on
-Hector. USB reports omit the device binding, key and saved preimages. There is
-no automatic power-loss recovery service. See KNOWN-LIMITATIONS.md.
+Computer tests simulate mounts/services/reboot. Physical durability and
+unbootable-device recovery remain unqualified.

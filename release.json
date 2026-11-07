@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-beta.6",
+  "version": "0.2.0-beta.1",
   "product": "Mala",
   "hardware": "Hector",
   "firmware": "407",
@@ -28,5 +28,11 @@
     "usr/bin/usb_startup_debug.sh": "7791a6575782bd7b88bbe26add12b52108fc0aa857538bb81b381ddf38bfd5ff",
     "etc/systemd/system/jack.service": "a2688c386280ca3568a19a34614e8aee37c0a68169e256d5c3e93d4ec5c1f967",
     "usr/bin/start_beebo.sh": "31cd339db2dba0849b8bc6c2cd12cb76a00bbf81250f0846a1f3c6cc0f22d346"
-  }
+  },
+  "component": "mala",
+  "compatibility_revision": 2,
+  "interface_generation": 2,
+  "base_dsp_version": "0.1.0-beta.6",
+  "public_usb_hardware_tested": false,
+  "release_stage": "experimental-prerelease-candidate"
 }

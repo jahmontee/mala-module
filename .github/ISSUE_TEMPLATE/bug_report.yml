@@ -6,7 +6,14 @@ body:
     id: versions
     attributes:
       label: Hector firmware and Mala version
-      placeholder: "Hector firmware 407, Mala 0.1.0-beta.6"
+      placeholder: "Hector firmware 407, Mala 0.2.0-beta.1, compat.2"
+    validations:
+      required: true
+  - type: textarea
+    id: companions
+    attributes:
+      label: Other installed modules and versions
+      description: Include Network/Link, Squelch Box and any other community modules, plus USB kit revision and installation order.
     validations:
       required: true
   - type: dropdown

@@ -1,63 +1,70 @@
-# Mala for Hector — public beta
+# Mala v2 for Hector · experimental public beta
 
-Mala is a community granular texture processor for **Hector running firmware 407**,
-based on the open-source Beads algorithms by Emilie Gillet / Mutable Instruments.
-It includes four recording qualities, Freeze and Seed, CV modulation, wavetable
-synthesis, frozen-buffer preset storage, MIDI mapping, and a touchscreen editor.
+Granular textures based on Beads by Emilie Gillet / Mutable Instruments, for
+**Poly Effects Hector firmware 407**. The approved silver v2 interface adds
+vertical knob gestures, a four-mode quality menu and live Shape envelope guide.
 
-**0.1.0-beta.6** includes Back to the left of Module Settings and a dedicated
-module Bypass on the right. The plugin URI and 58-port parameter contract are
-unchanged from the private beta.5.
+![Mala v2, rendered from its actual Qt5 source](docs/images/mala-v2.png)
 
-![Mala beta.6 touchscreen editor](docs/images/mala-beta6.png)
+**0.2.0-beta.1 · USB compatibility revision2 is an experimental candidate.**
+The UI was privately deployed and visually approved on Hector. These exact USB
+kits have computer-only testing and no physical USB trial. Read
+[validation](docs/VALIDATION.md) and [limitations](docs/KNOWN-LIMITATIONS.md).
 
-## Install with a USB thumb drive
+## Install or update by USB
 
-No SSH, terminal, network connection, or SD-card removal is required for normal
-installation or rollback. Use a dedicated, single-partition FAT32 thumb drive.
+Download the matching install ZIP, rollback ZIP and SHA256SUMS from this
+version's GitHub prerelease. Use one kit per dedicated FAT32 thumb drive.
+An 8 GB drive is ample. Normal installation needs no SSH or internet access.
 
-1. Download `mala-hector-0.1.0-beta.6-usb-install.zip` from this repository's Releases.
-2. Follow the [USB installation instructions](docs/USB-INSTALL.md): extract the
-   kit directly onto the thumb drive, save your patch, and start Hector with it inserted.
-3. The kit checks compatibility, retains originals on Hector, applies Mala and
-   requests an ordinary reboot. Keep the drive inserted through that reboot for
-   verification.
-4. Find **Mala** in the Ported module browser. The editor displays `v0.1.0-beta.6`.
-5. **Remove the installer thumb drive once startup is complete and Mala opens.**
-   Leave it disconnected during normal use; no extra reboot is required. On your
-   computer, check its `MALA-RESULT.txt` for **INSTALLED AND VERIFIED**.
+1. Follow [USB installation](docs/USB-INSTALL.md). Extract at the drive root,
+   so debug.sh and mala/ are directly visible.
+2. Save your patch, power off, insert USB and power on. Leave USB and power
+   connected through the automatic normal reboot.
+3. Open Mala from Ported and confirm v0.2.0-beta.1. Remove the USB after startup.
+4. On a computer read MALA-RESULT.txt for **INSTALLED AND VERIFIED**. Keep the
+   installer disconnected during normal use.
 
-The kit uses firmware 407's existing **USB startup-script support**. It runs when
-the thumb drive mounts; it does not use the touchscreen's vendor Firmware Update
-button. Use the separate [USB rollback kit](docs/USB-ROLLBACK.md) to restore your
-own pre-installation files.
+Public Mala beta.6 updates **in place**, with its same URI and 58 ports.
+Replaced files are backed up before writing. Existing patches refer to the same
+module. The [rollback kit](docs/USB-ROLLBACK.md) removes Mala and retains
+recognized companions. Returning to the old interface after a completed update
+is a separate downgrade operation.
 
-The initial public installer accepts **unmodified stock 407**. It refuses older
-private Mala installs, other community UI modifications, Beebo, and unknown files
-rather than overwriting them. See [compatibility and limitations](docs/KNOWN-LIMITATIONS.md).
+## Compatibility
 
-## Beta validation status
+Coordinated revision2 kits support optional Squelch Box 0.1.0-beta.5 and combined
+Network Connection 0.1.0-beta.2 / Ableton Link sync 0.3.0-beta.5 in any installation
+or independent removal order. Use revision2 companion kits after migrating.
+See [the full compatibility list](docs/COMPATIBILITY.md), including pending
+Echo Field/XL, Orbit/Polyrhythm, 4×4, Cardinal, Oscilloscope and Link audio
+receiver/sender combinations. Unknown shared-file changes are refused before
+writing. Future releases must review and extend this compatibility list.
 
-The same ARM DSP binary has prior Hector use and ARM emulation evidence. The
-footer has been installed and physically confirmed by the owner on Hector.
-The public USB kits passed installation, automatic post-reboot verification,
-rollback and both additional startup checks on one Hector. The owner confirmed
-the beta.6 editor, audio, Back, Bypass and module controls, followed by normal
-stock audio after removal. The test used a pre-Mala firmware407 SD backup with
-existing internal preset/settings storage, not a fresh vendor-download flash or
-factory reset. External MIDI/CV and detailed frozen-buffer save/reload were not
-separately repeated in this public-kit trial. Read [validation](docs/VALIDATION.md)
-and [known limitations](docs/KNOWN-LIMITATIONS.md) before testing.
+## Fresh defaults and controls
 
-## Community development
+New instances start with Feedback/Reverb at 0%, Dry/Wet at 50%, and the remaining
+knobs at noon. Existing loaded patches retain their values. Density at noon
+stops automatic grains. Move Density away from center or use Seed for grains.
 
-Forks, pull requests and issue reports are welcome. Please read
-[Contributing](CONTRIBUTING.md) and use the supplied bug-report template. Start
-with [Build from source](docs/BUILDING.md) and the [technical design](docs/INSTALLER-DESIGN.md).
+Freeze protects the current recording mode, so quality/mono changes wait until
+it releases. Latch holds Seed active. Short Seed presses clear latch and a
+four-second hold engages it. See [panel controls](docs/V2-PANEL-CONTROLS.md),
+[quality](docs/V2-QUALITY.md) and [interface notes](docs/V2-UI.md).
 
-Mala is an independent community project, not an official Poly Effects or Mutable
-Instruments release. Original design and DSP credit belong to Emilie Gillet and
-the upstream contributors. See [credits](CREDITS.md) and [licensing](docs/LICENSING.md).
+## Credits and community
 
-The Hector adaptation was developed by jahmontee / Poly Hector with AI development
-assistance from OpenAI Codex.
+Original Beads design and DSP by **Emilie Gillet / Mutable Instruments**, with
+Frédéric Meslin and Oliver Rockstedt credited upstream. Hector adaptation,
+direction and physical testing by **jahmontee / Poly Hector**, with **AI
+development assistance from OpenAI Codex**. Full [credits](CREDITS.md) and
+[licenses](docs/LICENSING.md) accompany both USB kits and the source.
+This is an independent community project.
+
+Forks, pull requests and [issues](https://github.com/poly-hector/mala-module/issues)
+are welcome. Include firmware/module versions, steps and USB result text. Keep
+personal presets and private recovery backups out of public reports. Read
+[contributing](CONTRIBUTING.md) and [building](docs/BUILDING.md).
+
+The [published beta.6](https://github.com/poly-hector/mala-module/releases/tag/v0.1.0-beta.6)
+remains available as its own historical release.

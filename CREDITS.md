@@ -34,3 +34,7 @@ notice accompanies the accepted ARM build. No compiler or system libraries ship.
 
 This is an independent community beta. Poly Effects and Mutable Instruments
 have not been represented as sponsors, endorsers, or support providers for Mala.
+
+**Mala v2 artwork and interaction:** direction/approval by jahmontee / Poly
+Hector. OpenAI Codex assisted with QML and generated raster panel/knob/button
+artwork. Asset provenance is in ui-artwork.json. The appearance draws on Beads.

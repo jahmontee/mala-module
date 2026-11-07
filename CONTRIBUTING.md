@@ -18,5 +18,11 @@ Do not test an installer by running it against your development computer's root.
 
 For a bug, include firmware, Mala version, what you expected, what happened,
 reproduction steps and whether it occurs in a minimal patch. Installation issues
-can include a redacted MALA-RESULT.txt and the tail of MALA-LAUNCHER.log. Review
-logs for personal data before posting; never attach `/mnt/mala-public-beta/`.
+can include a redacted MALA-RESULT.txt and the tail of COMMUNITY-LAUNCHER.log. Review
+logs for personal data before posting; never attach private installer directories or journals.
+
+Review every module listed in docs/COMPATIBILITY.md before a new module/update.
+Preserve module identity and saved-state contracts or provide a migration.
+Test install, in-place update, independent removal, catalog migration and
+recovery against exact recognized companion versions. Update pending cases
+honestly. Future compatibility requires continuing release review.

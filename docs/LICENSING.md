@@ -21,8 +21,8 @@ The USB ZIPs include their complete corresponding project source under
 `mala/source/`, including the modified UI source, original selected public 407
 preimages, exact integration patch, locked portable Beads/stmlib sources, build
 overlays and build scripts. The separate source archive contains the same source.
-The ARM binary is the accepted private beta.5 DSP binary; public beta.6 changes
-only UI/release packaging. No network fetch is required to compile the source.
+The retained ARM binary is the accepted Mala DSP. The v2 release changes the
+interface, fresh-add initialization and coordinated compatibility packaging. No network fetch is required to compile the source.
 
 Source locks identify original bytes and upstream URLs. Build overlays explicitly
 isolate RNG storage per thread, guard an unused zero-weight wavetable read,

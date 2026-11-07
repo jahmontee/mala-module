@@ -1,41 +1,28 @@
-# Mala 0.1.0-beta.6 — Hector firmware 407
+# Mala v2 · 0.2.0-beta.1 · compatibility revision2
 
-Community beta for willing testers. Based on the open-source Beads DSP
-by Emilie Gillet / Mutable Instruments, adapted for Hector's patching environment.
+Experimental public-beta candidate for Hector 407. Beads-inspired silver
+interface, vertical knob movement, four-mode quality menu/LED, live Shape
+envelope, yellow Freeze/Seed/Latch lights and centered Mono Buffer layout.
 
-Includes four recording qualities, Freeze and Seed, CV modulation, wavetable
-synthesis, frozen-buffer patch storage, MIDI mapping, and the new footer: Back
-left of Module Settings, module Bypass on the right.
+Fresh Feedback/Reverb start at 0%, Dry/Wet at 50%, other knobs at noon.
+Density at noon stops automatic grains. Existing saved values, DSP, URI,
+58 ports and saved-state format are retained.
 
-Download the **USB install ZIP**, extract it to a dedicated FAT32 thumb drive,
-and follow READ-ME-FIRST.txt. No SSH or network setup is required. Use the separate
-**USB rollback ZIP** to restore your Hector's saved pre-installation files. This
-uses automatic USB startup support; do not press the vendor Firmware Update button.
-Keep the installer inserted through the automatic reboot. Once startup completes
-and Mala opens, **remove the installer USB and leave it disconnected for normal
-use**. No additional reboot is required. Check its `MALA-RESULT.txt` on a computer
-for **INSTALLED AND VERIFIED**.
+Recognized public beta.6 updates in place, with authenticated recovery backups.
+Coordinated revision2 supports optional Squelch Box beta5 and combined Network
+Connection beta2 / Link sync beta5. Other project modules remain pending public
+integration review. See [compatibility](docs/COMPATIBILITY.md).
 
-This initial installer accepts unmodified Hector firmware407. Beebo, other firmware,
-older private Mala installs and other community UI modifications are refused.
-Read the full known limitations and retain pre-beta patches.
+Download matching install, rollback and SHA256SUMS. Follow
+[USB installation](docs/USB-INSTALL.md). Keep USB connected through the automatic
+reboot, then remove it and check MALA-RESULT.txt. Rollback removes Mala while
+retaining recognized companions. Completed-version downgrade is separate.
 
-The DSP binary and 58-port preset contract match the accepted private beta.5.
-Native source/DSP, Qt5 UI, filesystem transaction and simulated USB-worker checks
-pass. Public USB installation, automatic post-reboot verification, rollback and
-both additional startup checks passed on one Hector, with owner-confirmed audio
-and editor controls and normal stock audio after removal. That trial used a
-pre-Mala firmware407 SD backup and existing internal preset/settings storage,
-not a fresh vendor-download flash or factory reset. External MIDI/CV and detailed
-frozen-buffer save/reload were not separately repeated in this public-kit trial.
-Physical power-loss recovery and broad reliability/calibration claims are not
-established. See docs/VALIDATION.md for the exact evidence and remaining coverage.
+**This exact v2 USB family has no physical install/reboot/rollback trial.**
+Private v2 UI use and earlier beta.6 USB testing are separate evidence.
+Computer-only preparation is documented in [validation](docs/VALIDATION.md).
+Read [limitations](docs/KNOWN-LIMITATIONS.md) before volunteering to test.
 
-Report reproducible issues using the repository's bug-report template. Source,
-credits, license texts, build instructions and contribution guidance are included.
-This is an independent community project, not an official vendor release.
-
-Original Beads design and DSP: **Emilie Gillet / Mutable Instruments**. Hector
-adaptation and project direction: **jahmontee / Poly Hector**, with **OpenAI Codex**
-acknowledged for AI development assistance with implementation, testing tools,
-documentation and packaging. Full upstream acknowledgments are in CREDITS.md.
+Original Beads by Emilie Gillet / Mutable Instruments and upstream contributors.
+Hector adaptation/testing by jahmontee / Poly Hector, with AI development
+assistance from OpenAI Codex. Independent community project.

@@ -1,73 +1,49 @@
-# USB installation — Mala 0.1.0-beta.6
+# USB install or update · Mala v2 0.2.0-beta.1 · compat.2
 
-For Hector, unmodified firmware 407. Beebo and other firmware versions are not
-supported by this installer. This is a beta release; read KNOWN-LIMITATIONS.md.
-Installation, automatic post-reboot verification and rollback passed on one
-Hector using a pre-Mala407 SD backup with existing internal settings/presets.
-This was not a fresh vendor-download flash; see VALIDATION.md for the test scope.
+Experimental candidate for Hector 407. Exact-kit physical testing is unperformed.
+Read VALIDATION.md, KNOWN-LIMITATIONS.md and COMPATIBILITY.md.
 
-The kit starts automatically when its USB drive mounts. Save wanted patch edits
-and finish playing before inserting it. Installation pauses the screen and audio
-and normally reboots Hector once. Network access and SSH are not needed.
+## Prepare on a computer
 
-**When to remove the USB:** keep it inserted through the automatic reboot. Once
-the normal interface has returned and Mala opens, remove the installer drive.
-Leave it disconnected during normal use. No additional reboot is required.
-
-## Prepare the thumb drive on your computer
-
-1. Use a dedicated thumb drive with one FAT32 partition. Back up anything on it
-   before changing its format or files. No particular drive label is required.
-2. Download the **USB install ZIP** and its release SHA256SUMS from the same release.
-   Compare the archive checksum using your computer's checksum tool. Checksums
-   detect a damaged download; they are not a publisher signature.
-3. Extract the ZIP **directly to the root** of the drive. Its top level must contain:
-
-   ```text
-   debug.sh
-   mala/
-   READ-ME-FIRST.txt
-   ```
-
-   Keep the `mala` folder intact. Do not leave an extra outer ZIP folder, another
-   `debug.sh`, or another update kit on the drive. Safely eject it.
+1. Download mala-hector-0.2.0-beta.1-compat.2-usb-install.zip, the matching
+   rollback ZIP and SHA256SUMS from the same release. Compare the archive
+   checksum. Checksums detect corruption without providing a publisher signature.
+2. Use a dedicated drive with one writable FAT32 partition. An 8 GB drive is
+   ample. Back up wanted files before reformatting.
+3. Extract the complete install ZIP to the root. You must see debug.sh, mala/
+   and READ-ME-FIRST.txt. Keep the folder intact, use one kit per drive and
+   safely eject it.
 
 ## Install on Hector
 
-1. Save your patch and shut Hector down normally. Insert the prepared drive.
-2. Start Hector. The existing USB startup service runs the kit automatically.
-   **Do not press Firmware Update.** This is a community startup-script kit,
-   not a vendor firmware-update archive.
-3. Leave power and the thumb drive connected. The screen/audio services pause;
-   after file verification, Hector requests its own normal reboot.
-4. Keep the drive inserted through that reboot. The next startup verifies the
-   installed files and read-only firmware without installing or rebooting again.
-5. When the normal interface returns, check the Ported browser for Mala and open
-   it. Confirm the editor shows `v0.1.0-beta.6`.
-6. **Remove the installer drive now that startup is complete and Mala opens.**
-   On a computer, read `MALA-RESULT.txt` at its root. The final success status is
+1. Save wanted edits, stop playback and power Hector off normally.
+2. Insert USB and power on. Firmware407 USB startup runs the kit automatically.
+   Do not press the vendor Firmware Update button.
+3. Leave power and USB connected. Screen/audio services pause, originals are
+   backed up, files are checked/written and Hector requests a normal reboot.
+4. Keep USB connected through that reboot. Next startup verifies installed
+   files and read-only firmware without installing/rebooting again.
+5. Open Mala in Ported and confirm v0.2.0-beta.1.
+6. Remove USB after startup. On a computer read MALA-RESULT.txt for
    **INSTALLED AND VERIFIED**. Keep the installer disconnected during normal use.
-7. Check Back, Bypass, Freeze/Seed and your intended audio path at a low monitoring
-   level. There is no need to reconnect the installer or reboot again for these checks.
+7. Test controls and your audio path at low monitoring level. A fresh Density
+   at noon stops automatic grains. Move it away from center or use Seed.
 
-If the module is already installed, the drive performs verification only. It
-never silently upgrades a different beta or replaces a conflicting community UI.
-If admission fails, it leaves firmware unchanged and writes the reason to
-`MALA-RESULT.txt`; the normal interface can continue.
+Recognized public beta.6 updates in place, keeping the same module URI/ports.
+Other recognized add-ons remain installed. Unknown versions or edits are
+refused before firmware writes, with a reason in the report. Do not remove a
+companion to bypass a compatibility refusal. Use coordinated revision2 kits
+for subsequent companion changes. Older stock-only/compat.1 tools lack v2 support.
 
-## Recovery and removal
+## Problems or interrupted installation
 
-Keep the matching USB rollback ZIP. Your originals and metadata are stored on
-Hector at `/mnt/mala-public-beta/`, not solely on the removable drive. Do not
-remove or share that private directory: it can contain original vendor UI files
-and a device-specific backup identity.
+Keep the result, COMMUNITY-LAUNCHER.log and matching rollback ZIP. Recovery data
+stays private on Hector at /mnt/hector-community-beta/. Preserve older private
+backup folders too. Never delete or share their keys/journals.
 
-If a file changes during install, the worker attempts verified restoration and a
-normal reboot. A report saying **RECOVERY REQUIRED** needs attention; it is not a
-successful install. Do not repeatedly rerun the install drive or cycle power.
-Follow USB-ROLLBACK.md. If Hector cannot complete a normal boot, USB rollback is
-not guaranteed; offline SD recovery or help from the maintainer may be needed.
-
-Presets, recordings, calibration, network configuration, boot firmware and the
-package database are not installation targets. Patches saved using Mala still
-need Mala to produce its sound after removal. Back up wanted patches separately.
+After **RECOVERY VERIFIED; NO RETRY**, starting software is restored and the same
+USB will not repeat the failed operation. Follow the report to acknowledge with
+the opposite matching kit once, then deliberately retry if desired.
+**RECOVERY REQUIRED** needs the matching rollback kit and maintainer attention.
+Avoid repeated installation attempts. USB recovery requires normal startup;
+an unbootable device may need offline SD recovery.

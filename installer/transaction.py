@@ -95,22 +95,33 @@ def atomic(path, raw, meta=None, temporary=None):
             temp.unlink()
 
 
+ALLOWED_TARGETS = ('etc/systemd/system/hector-link-sync-control.service', 'etc/systemd/system/hector-link-sync-ethernet.service', 'etc/systemd/system/hector-link-sync-wifi.service', 'etc/systemd/system/hector-network-panel.service', 'etc/systemd/system/multi-user.target.d/90-network-link.conf', 'home/debian/UI/fourbyfour_display.py', 'home/debian/UI/ingen_wrapper.py', 'home/debian/UI/link-ports.json', 'home/debian/UI/mala-entry.json', 'home/debian/UI/mala-ports.json', 'home/debian/UI/mala.LICENSE', 'home/debian/UI/mala_407.py', 'home/debian/UI/mala_restore.py', 'home/debian/UI/mala_state.py', 'home/debian/UI/module_info.py', 'home/debian/UI/network-link-catalog.json', 'home/debian/UI/network_407.py', 'home/debian/UI/playhead_policy.py', 'home/debian/UI/poly303-entry.json', 'home/debian/UI/qml/ModuleBrowser.qml', 'home/debian/UI/qml/ModuleMore.qml', 'home/debian/UI/qml/MultiValueButtonsSlider.qml', 'home/debian/UI/qml/PatchBay.qml', 'home/debian/UI/qml/PatchBayEffect.qml', 'home/debian/UI/qml/Spotlight.qml', 'home/debian/UI/qml/TitleFooter.qml', 'home/debian/UI/qml/ValueButtonsSlider.qml', 'home/debian/UI/qml/link/FirmwarePanel.qml', 'home/debian/UI/qml/link/LinkButton.qml', 'home/debian/UI/qml/link/LinkChoice.qml', 'home/debian/UI/qml/link/LinkMeter.qml', 'home/debian/UI/qml/link/LinkSlider.qml', 'home/debian/UI/qml/link/LinkTempo.qml', 'home/debian/UI/qml/link/SyncEditor.qml', 'home/debian/UI/qml/link/catalog.js', 'home/debian/UI/qml/mala/BeadsBadge.qml', 'home/debian/UI/qml/mala/BeadsKnob.qml', 'home/debian/UI/qml/mala/BeadsSwitch.qml', 'home/debian/UI/qml/mala/Button.qml', 'home/debian/UI/qml/mala/ComboBox.qml', 'home/debian/UI/qml/mala/Editor.qml', 'home/debian/UI/qml/mala/EnvelopeGraphic.qml', 'home/debian/UI/qml/mala/FirmwarePanel.qml', 'home/debian/UI/qml/mala/ItemDelegate.qml', 'home/debian/UI/qml/mala/LibraryPanel.qml', 'home/debian/UI/qml/mala/ModeHelpDialog.qml', 'home/debian/UI/qml/mala/ParameterSlider.qml', 'home/debian/UI/qml/mala/Slider.qml', 'home/debian/UI/qml/mala/TouchButton.qml', 'home/debian/UI/qml/mala/assets/knob-body.png', 'home/debian/UI/qml/mala/assets/silver-button.png', 'home/debian/UI/qml/mala/assets/silver-panel.png', 'home/debian/UI/qml/mala/catalog.js', 'home/debian/UI/qml/network/FirmwarePanel.qml', 'home/debian/UI/qml/network/Keyboard.qml', 'home/debian/UI/qml/poly303/Bank.js', 'home/debian/UI/qml/poly303/BuildInfo.js', 'home/debian/UI/qml/poly303/Choice.qml', 'home/debian/UI/qml/poly303/ClockSource.js', 'home/debian/UI/qml/poly303/Editor.qml', 'home/debian/UI/qml/poly303/Fader.qml', 'home/debian/UI/qml/poly303/FirmwarePanel.qml', 'home/debian/UI/qml/poly303/Key.qml', 'home/debian/UI/qml/poly303/Knob.qml', 'home/debian/UI/qml/poly303/Names.js', 'home/debian/UI/qml/poly303/NumberBox.qml', 'home/debian/UI/qml/poly303/Pattern.js', 'home/debian/UI/qml/poly303/PatternMenu.qml', 'home/debian/UI/qml/poly303/Playhead.js', 'home/debian/UI/qml/poly303/TempoMenu.qml', 'home/debian/UI/qml/poly303/TempoReadout.js', 'home/debian/UI/qml/poly303/Theme.js', 'home/debian/UI/qml/poly303/ThemeSwitch.qml', 'home/debian/UI/qml/poly303/WaveSwitch.qml', 'home/debian/UI/qml/poly303/catalog.js', 'home/debian/UI/show_widget.py', 'home/debian/UI/squelch_bank.py', 'home/debian/UI/squelch_bank_codec.py', 'home/debian/UI/squelch_bank_fields.py', 'home/debian/UI/squelch_startup.py', 'home/debian/UI/sync_407.py', 'usr/lib/firmware/ath9k_htc/htc_9271-1.4.0.fw', 'usr/lib/firmware/mt7662.bin', 'usr/lib/firmware/mt7662_rom_patch.bin', 'usr/lib/lv2/hector-link-sync.lv2/hector_link_sync.so', 'usr/lib/lv2/hector-link-sync.lv2/manifest.ttl', 'usr/lib/lv2/hector-link-sync.lv2/sync.ttl', 'usr/lib/lv2/mala.lv2/LICENSE', 'usr/lib/lv2/mala.lv2/NOTICE', 'usr/lib/lv2/mala.lv2/UPSTREAM-LICENSES', 'usr/lib/lv2/mala.lv2/mala.so', 'usr/lib/lv2/mala.lv2/mala.ttl', 'usr/lib/lv2/mala.lv2/manifest.ttl', 'usr/lib/lv2/poly303.lv2/manifest.ttl', 'usr/lib/lv2/poly303.lv2/poly303.so', 'usr/lib/lv2/poly303.lv2/poly303.ttl', 'usr/local/lib/hector-link-sync/backend.py', 'usr/local/lib/hector-link-sync/client.py', 'usr/local/lib/hector-link-sync/control', 'usr/local/lib/hector-link-sync/helper', 'usr/local/lib/hector-network-panel/backend.py', 'usr/local/lib/hector-network-panel/client.py', 'usr/share/doc/network-link-hector/Atheros-firmware.txt', 'usr/share/doc/network-link-hector/MediaTek-firmware.txt')
+
+
+def valid_hash(h):
+    return h is None or isinstance(h,str) and len(h)==64 and all(c in '0123456789abcdef' for c in h)
+
 def validate_manifest(m):
-    if (m.get('schema') != 'mala-hector/public-beta/1' or m.get('hardware') != 'Hector'
-            or m.get('firmware') != '407' or m.get('architecture') != 'aarch64'
-            or m.get('sample_rate') != 48000 or m.get('ports') != 58
-            or m.get('plugin_uri') != 'urn:beebo-hector-lab:mala-preview'):
-        raise ValueError('Unsupported release contract')
-    seen = set()
+    if (m.get('schema')!='hector-community/transition/1' or m.get('hardware')!='Hector'
+            or m.get('firmware')!='407' or m.get('architecture')!='aarch64'
+            or m.get('component') not in ('mala','network-link','squelch-box')
+            or m.get('action') not in ('install','rollback')):
+        raise ValueError('Unsupported community transition contract')
+    seen=set()
     for row in m['files']:
-        name = row['path']
-        if (name in seen or not name.startswith(('home/debian/UI/', 'usr/lib/lv2/mala.lv2/'))
-                or '..' in PurePosixPath(name).parts or PurePosixPath(name).is_absolute()
-                or len(row['sha256']) != 64):
-            raise ValueError('Unexpected or duplicate payload path')
+        name=row['path']
+        if (name not in ALLOWED_TARGETS or name in seen or not valid_hash(row['sha256'])
+                or not valid_hash(row['before_sha256']) or row['sha256']==row['before_sha256']
+                or type(row['size']) is not int or row['size']<0 or row['size']>8388608
+                or row.get('mode',0o644) not in (0o644,0o755)
+                or (row['sha256'] is None and row['size']!=0)):
+            raise ValueError('Unexpected or duplicate transition target')
         seen.add(name)
-    if len(seen) != 34:
-        raise ValueError('Expected the complete 34-file Mala release')
+    if not seen or len(seen)!=m.get('file_count') or seen.intersection(m['guards']):
+        raise ValueError('Incomplete or overlapping transition inventory')
+    for name,h in m['guards'].items():
+        p=PurePosixPath(name)
+        if p.is_absolute() or '..' in p.parts or str(p)!=name or not valid_hash(h):raise ValueError('Invalid preservation guard')
 
 
 class Transaction:
@@ -133,11 +144,11 @@ class Transaction:
 
     def preflight(self, manifest, payload):
         validate_manifest(manifest)
-        if set(payload) != {r['path'] for r in manifest['files']}:
+        if set(payload) != {r['path'] for r in manifest['files'] if r['sha256'] is not None}:
             raise ValueError('Payload file set differs')
         for row in manifest['files']:
             name = row['path']
-            if digest(payload[name]) != row['sha256'] or len(payload[name]) != row['size']:
+            if row['sha256'] is not None and (digest(payload[name]) != row['sha256'] or len(payload[name]) != row['size']):
                 raise ValueError('Corrupt payload: ' + name)
             if file_hash(safe(self.root, name)) != row['before_sha256']:
                 raise ValueError('Stock 407 mismatch or conflicting installation: ' + name)
@@ -146,7 +157,7 @@ class Transaction:
                 raise ValueError('Stock catalog guard differs: ' + name)
         for name in manifest['require_absent']:
             if os.path.lexists(str(safe(self.root, name))):
-                raise ValueError('Existing Mala/community target: ' + name)
+                raise ValueError('Existing community target: ' + name)
 
     def prepare(self, manifest, payload, identity, boot):
         self.preflight(manifest, payload)
@@ -158,20 +169,37 @@ class Transaction:
             p = safe(self.root, row['path'])
             raw = regular(p) if row['before_sha256'] else None
             old_meta = metadata(p) if raw is not None else None
-            new_meta = old_meta or dict(mode=0o644, uid=ui_owner['uid'] if row['path'].startswith('home/') else self.root.stat().st_uid,
+            new_meta = old_meta or dict(mode=row.get('mode', 0o644), uid=ui_owner['uid'] if row['path'].startswith('home/') else self.root.stat().st_uid,
                 gid=ui_owner['gid'] if row['path'].startswith('home/') else self.root.stat().st_gid,
                 atime_ns=0, mtime_ns=0, xattrs={})
             rows.append(dict(row, original=base64.b64encode(raw).decode('ascii') if raw is not None else None,
                              metadata=old_meta, installed_metadata=new_meta))
         self.record = dict(schema=1, version=manifest['version'], identity=identity, boot=boot,
-            phase='prepared', files=rows, guards=manifest['guards'], applied=[], pending=None,
-            created_dirs=[], services={}, id=self.store.name)
+            component=manifest['component'], action=manifest['action'], from_state=manifest['from_state'], to_state=manifest['to_state'], catalog_sha256=manifest['catalog_sha256'], phase='prepared', files=rows, guards=manifest['guards'], applied=[], pending=None,
+            created_dirs=[], services={}, id=self.store.name, guard_metadata={n:metadata(safe(self.root,n)) for n,h in manifest['guards'].items() if h is not None})
         self.save()
         # Round-trip the complete durable original set before any target write.
         self.load()
         for row in rows:
             if row['original'] is not None and digest(base64.b64decode(row['original'])) != row['before_sha256']:
                 raise ValueError('Original backup does not match')
+
+    def verify_preimages(self):
+        for row in self.record['files']:
+            p=safe(self.root,row['path'])
+            if file_hash(p)!=row['before_sha256']:raise ValueError('Preimage changed')
+            if row['metadata'] is not None:
+                now=metadata(p)
+                if any(now[k]!=row['metadata'][k] for k in ['mode','uid','gid','mtime_ns','xattrs']):raise ValueError('Preimage metadata changed')
+        self.verify_guards()
+
+    def verify_guards(self):
+        for name,h in self.record['guards'].items():
+            p=safe(self.root,name)
+            if file_hash(p)!=h:raise ValueError('Protected component changed: '+name)
+            if name in self.record.get('guard_metadata',{}):
+                now=metadata(p);expected=self.record['guard_metadata'][name]
+                if any(now[k]!=expected[k] for k in ['mode','uid','gid','mtime_ns','xattrs']):raise ValueError('Protected component metadata changed')
 
     def ensure_parents(self, p):
         missing = []
@@ -186,21 +214,24 @@ class Transaction:
             sync_dir(parent.parent)
 
     def temp_path(self, p):
-        return p.with_name('.' + p.name + '.mala-' + self.record['id'] + '.tmp')
+        return p.with_name('.' + p.name + '.community-' + self.record['id'] + '.tmp')
 
     def apply(self, payload, checkpoint=lambda stage, name: None):
+        self.verify_preimages()
         self.record['phase'] = 'publishing'
         self.save()
         for row in self.record['files']:
             name = row['path']
             p = safe(self.root, name)
-            if file_hash(p) != row['before_sha256'] or digest(payload[name]) != row['sha256']:
+            if file_hash(p) != row['before_sha256'] or (row['sha256'] is not None and digest(payload[name]) != row['sha256']):
                 raise ValueError('Target or payload changed before publication: ' + name)
-            self.ensure_parents(p)
+            if row['sha256'] is not None:self.ensure_parents(p)
             self.record['pending'] = name
             self.save()
             checkpoint('before', name)
-            atomic(p, payload[name], row['installed_metadata'], self.temp_path(p))
+            if row['sha256'] is None:
+                p.unlink();sync_dir(p.parent)
+            else:atomic(p, payload[name], row['installed_metadata'], self.temp_path(p))
             checkpoint('after', name)
             self.record['applied'].append(name)
             self.record['pending'] = None
@@ -214,12 +245,11 @@ class Transaction:
             p = safe(self.root, row['path'])
             if file_hash(p) != row['sha256']:
                 raise ValueError('Installed file differs: ' + row['path'])
+            if row['sha256'] is None:continue
             meta = metadata(p)
             if any(meta[n] != row['installed_metadata'][n] for n in ['mode', 'uid', 'gid', 'mtime_ns', 'xattrs']):
                 raise ValueError('Installed metadata differs: ' + row['path'])
-        for name, value in self.record['guards'].items():
-            if file_hash(safe(self.root, name)) != value:
-                raise ValueError('Preserved catalog differs')
+        self.verify_guards()
 
     def verify_restored(self):
         for row in self.record['files']:
@@ -230,9 +260,7 @@ class Transaction:
                 observed = metadata(p)
                 if any(observed[k] != row['metadata'][k] for k in ['mode', 'uid', 'gid', 'mtime_ns', 'xattrs']):
                     raise ValueError('Restored metadata differs: ' + row['path'])
-        for name, value in self.record['guards'].items():
-            if file_hash(safe(self.root, name)) != value:
-                raise ValueError('Restored catalog guard differs')
+        self.verify_guards()
 
     def admit_rollback(self):
         for row in self.record['files']:
@@ -250,9 +278,7 @@ class Transaction:
                     raise ValueError('Rollback refuses changed target metadata: ' + row['path'])
             if row['original'] is not None and digest(base64.b64decode(row['original'])) != row['before_sha256']:
                 raise ValueError('Backup original corrupt')
-        for name, value in self.record['guards'].items():
-            if file_hash(safe(self.root, name)) != value:
-                raise ValueError('Rollback catalog guard differs')
+        self.verify_guards()
 
     def rollback(self, checkpoint=lambda stage, name: None):
         self.admit_rollback()
@@ -268,8 +294,7 @@ class Transaction:
             if current == row['sha256']:
                 checkpoint('before_restore', row['path'])
                 if row['original'] is None:
-                    p.unlink()
-                    sync_dir(p.parent)
+                    if p.exists():p.unlink();sync_dir(p.parent)
                 else:
                     atomic(p, base64.b64decode(row['original']), row['metadata'], self.temp_path(p))
                 checkpoint('after_restore', row['path'])

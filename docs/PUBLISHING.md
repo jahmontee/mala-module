@@ -1,28 +1,17 @@
-# Publishing on GitHub
+# GitHub preparation
 
-The public repository is [poly-hector/mala-module](https://github.com/poly-hector/mala-module),
-with source, forks, pull requests and issue reports. Use GitHub Releases for the
-USB downloads and mark beta releases as prereleases. The local source directory
-and download prefix remain `mala-hector`.
+Target repository is poly-hector/mala-module. This candidate is prepared locally.
 
-1. Review this standalone source tree. Its history must start here; do not import
-   the private lab repository/history, ignored build directories or device records.
-2. Keep Issues enabled and include the source, existing license, credits,
-   CONTRIBUTING, issue/PR templates and CI workflow.
-   Contributors can fork and propose PRs; they do not need direct write access.
-3. Let CI build native DSP and run the disposable tests/audit. Review all logs
-   before publishing the release downloads. Require a successful GitHub Actions
-   run for the exact release source commit; local checks do not replace that run.
-4. Review the completed one-unit USB install/reboot/rollback evidence and the
-   remaining coverage in VALIDATION.md. State the actual pre-Mala407 backup-card
-   baseline and its limits in the prerelease; do not call it a fresh vendor-flash
-   qualification or treat simulated recovery as physical power-loss testing.
-5. Tag the reviewed source commit `v0.1.0-beta.6`. Build the archives from that exact
-   clean source state; verify SHA256SUMS and complete source with tools/verify_archives.py.
-6. Create a draft GitHub prerelease for that tag, using RELEASE-NOTES.md, and attach
-   the install ZIP, rollback ZIP, source archive and SHA256SUMS together. Review the
-   concrete draft and publish only when approved. Do not label it a stable release.
+1. Review clean source, screenshot, credits, compatibility matrix and final
+   receipts. Exclude private lab history, presets, keys and device backups.
+2. Upload source on a v2 review branch and run CI on the exact commit.
+3. Create a draft prerelease tagged v0.2.0-beta.1-compat.2. Attach matching
+   install, rollback, complete source and SHA256SUMS. Preserve beta.6 assets.
+4. Review the companion revision2 kits together. Old compat.1 tools cannot
+   manage the v2 catalog. Keep exact versions and pending combinations visible.
+5. If publishing without a physical exact-kit trial, retain the experimental
+   label and missing-trial statement in README and release notes. The owner
+   requested computer-only preparation. Publishing follows concrete review.
 
-Keep installed-user reports separate from emulation/fixture results. Future beta
-versions need explicit source/binary/manifest updates and a reviewed migration;
-never replace the bytes behind an already published release or tag.
+Each future release must review the full module list in COMPATIBILITY.md and
+provide an explicit exact-version catalog migration. New bytes need a new tag.

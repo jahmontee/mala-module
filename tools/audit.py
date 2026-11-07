@@ -11,13 +11,32 @@ EXCLUDE={'.git','build','dist','artifacts','__pycache__'}
 
 def audit():
     required=['README.md','COPYING','LICENSE','CREDITS.md','CONTRIBUTING.md','install.py',
-              'installer/transaction.py','docs/USB-INSTALL.md','docs/USB-ROLLBACK.md',
+              'installer/transaction.py','installer/catalog.py','docs/COMPATIBILITY.md','docs/USB-INSTALL.md','docs/USB-ROLLBACK.md',
               'docs/KNOWN-LIMITATIONS.md','docs/LICENSING.md','docs/VALIDATION.md',
               'tools/build.py','tools/package.py','LICENSES/Qt-Slider-NOTICE.txt']
     for name in required:assert (ROOT/name).is_file(),name
     patterns=[rb'/home/(?!debian/)[A-Za-z0-9_.-]+/', rb'192\.168\.[0-9]+\.[0-9]+',
               rb'-----BEGIN [A-Z ]*PRIVATE KEY-----']
     release=json.loads((ROOT/'release.json').read_text())
+    artwork_manifest=ROOT/'ui-artwork.json'
+    large_images=set()
+    if artwork_manifest.exists():
+        artwork=json.loads(artwork_manifest.read_text())
+        for row in artwork['assets']:
+            name=row['file']
+            assert name.startswith('ui/qml/mala/assets/') and Path(name).suffix=='.png'
+            assert '..' not in Path(name).parts
+            raw=(ROOT/name).read_bytes()
+            assert hashlib.sha256(raw).hexdigest()==row['sha256'],name
+            assert len(raw)==row['bytes'],name
+            large_images.add(name)
+        reference=artwork['reference']
+        assert reference=='docs/images/mala-v2-approved-concept.png'
+        assert hashlib.sha256((ROOT/reference).read_bytes()).hexdigest()==artwork['reference_sha256']
+        large_images.update([reference,'docs/images/mala-v2-artwork-preview.png',
+            'docs/images/mala-v2-quality-preview.png','docs/images/mala-v2-quality-menu.png',
+            'docs/images/mala-v2-size-shape-preview.png','docs/images/mala-v2-freeze-seed-yellow.png',
+            'docs/images/mala-v2-badges-preview.png','docs/images/mala-v2-clean-preview.png'])
     upstream_literals=set()
     for name,h in release['stock_sha256'].items():
         raw=(ROOT/'tests/fixtures/stock407'/name).read_bytes()
@@ -33,7 +52,8 @@ def audit():
         raw=p.read_bytes()
         for pattern in patterns:
             assert all(m in upstream_literals for m in re.findall(pattern,raw)),'Private data pattern: '+str(relative)
-        assert len(raw)<1024*1024,str(relative)
+        limit=4*1024*1024 if str(relative) in large_images else 1024*1024
+        assert len(raw)<limit,str(relative)
         files.append(str(relative))
     lock=json.loads((ROOT/'provenance/source-lock.json').read_text())
     for row in lock['files']:
@@ -45,7 +65,14 @@ def audit():
     release=json.loads((ROOT/'release.json').read_text())
     for name,h in release['stock_sha256'].items():
         assert hashlib.sha256((ROOT/'tests/fixtures/stock407'/name).read_bytes()).hexdigest()==h
-    assert b'v0.1.0-beta.6' in (ROOT/'ui/qml/mala/Editor.qml').read_bytes()
+    preview=ROOT/'ui-preview.json'
+    if preview.exists():
+        development=json.loads(preview.read_text())
+        assert development['base_version']==release['version']
+        assert development['label'] in (ROOT/'ui/qml/mala/Editor.qml').read_text()
+        assert development['packaging_enabled'] is False
+    else:
+        assert ('v'+release['version']) in (ROOT/'ui/qml/mala/Editor.qml').read_text()
     print(json.dumps(dict(success=True,public_files=len(files),no_private_patterns=True,complete_source=True)))
     return files
 

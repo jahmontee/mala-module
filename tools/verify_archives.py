@@ -1,62 +1,66 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Verify release archives, embedded source, scripts, ELF and reproducibility."""
-import argparse
-import hashlib
-import io
-import json
-from pathlib import Path, PurePosixPath
-import stat
-import subprocess
-import tarfile
-import tempfile
-import zipfile
-from package import ROOT, source_files, payload, debug_entry, package
-
-
+"""Validate actual ZIP closure, source equality, integrity and desktop refusal."""
+import argparse,gzip,hashlib,io,json,stat,subprocess,tarfile,tempfile,zipfile,sys
+from pathlib import Path,PurePosixPath
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'installer'))
+import catalog as policy
 def sha(raw):return hashlib.sha256(raw).hexdigest()
-
-
-def verify(folder,arm):
-    src=source_files();m,payload_files=payload(arm);prefix='mala-hector-'+m['version']
-    expected={prefix+'-usb-install.zip',prefix+'-usb-rollback.zip',prefix+'-source.tar.gz'}
-    sums={line.split('  ',1)[1]:line.split('  ',1)[0] for line in (folder/'SHA256SUMS').read_text().splitlines()}
-    assert set(sums)==expected
-    for name,h in sums.items():assert sha((folder/name).read_bytes())==h,name
+def verify(folder):
+    receipt=json.loads((folder/'RESULT.json').read_text());component=receipt['component'];prefix=component;version=receipt['version'];base={'squelch-box':'squelch-box-hector','mala':'mala-hector','network-link':'network-link-hector'}[component]+'-'+version+'-compat.2'
+    checks={name:h for h,name in (line.split('  ',1) for line in (folder/'SHA256SUMS').read_text().splitlines())}
+    if set(checks)!=set(receipt['outputs']):raise ValueError('External checksum inventory differs')
+    for name,h in checks.items():
+        raw=(folder/name).read_bytes()
+        if sha(raw)!=h or h!=receipt['outputs'][name]['sha256']:raise ValueError('Archive checksum differs')
+    sources={}
+    with tarfile.open(folder/(base+'-source.tar.gz'),'r:gz') as t:
+        for m in t:
+            if not m.isfile() or m.issym() or m.islnk():raise ValueError('Nonregular source archive member')
+            if not m.name.startswith(base+'/'):raise ValueError('Source archive prefix differs')
+            name=m.name[len(base)+1:];sources[name]=t.extractfile(m).read()
+    if {n:sha(raw) for n,raw in sources.items()}!=receipt['public_source_sha256']:raise ValueError('Source archive incomplete/different')
     for action in ['install','rollback']:
-        with zipfile.ZipFile(folder/(prefix+'-usb-'+action+'.zip')) as z:
-            names=z.namelist();assert len(names)==len(set(names))
-            for i in z.infolist():
-                assert not PurePosixPath(i.filename).is_absolute() and '..' not in PurePosixPath(i.filename).parts
-                assert stat.S_IFMT(i.external_attr>>16)==stat.S_IFREG
-            for name,raw in src.items():assert z.read('mala/source/'+name)==raw,name
-            tools={n:z.read('mala/'+n) for n in ['install.py','installer/transaction.py']}
-            assert tools=={n:src[n] for n in tools}
-            assert z.read('debug.sh')==debug_entry(action,tools)
-            subprocess.run(['/bin/bash','-n'],input=z.read('debug.sh'),check=True)
-            assert json.loads(z.read('mala/manifest.json'))==m
-            inside_sums={line.split('  ',1)[1]:line.split('  ',1)[0] for line in z.read('mala/SHA256SUMS').decode().splitlines()}
-            assert set(inside_sums)==set(names)-{'mala/SHA256SUMS'}
-            for name,h in inside_sums.items():assert sha(z.read(name))==h
-            actual_payload={n[len('mala/payload/'):]:z.read(n) for n in names if n.startswith('mala/payload/')}
-            assert actual_payload==(payload_files if action=='install' else {})
-    with tarfile.open(folder/(prefix+'-source.tar.gz'),'r:gz') as t:
-        actual={i.name[len(prefix)+1:]:t.extractfile(i).read() for i in t.getmembers() if i.isfile()}
-        assert actual==src
-    with tempfile.TemporaryDirectory() as d:
-        package(arm,Path(d))
-        for name in expected|{'SHA256SUMS'}:assert (Path(d)/name).read_bytes()==(folder/name).read_bytes(),name
-    report=dict(success=True,version=m['version'],public_source_files=len(src),payload_files=34,
-                install_and_rollback_scripts_parse=True,source_complete_in_both_usb_kits=True,
-                no_linked_or_traversal_archive_entries=True,checksums_match=True,reproducible_archives=True,
-                hardware_usb_test_performed=False,archives={n:dict(bytes=(folder/n).stat().st_size,sha256=h) for n,h in sums.items()})
-    print(json.dumps(report,indent=2))
-    return report
-
-
+        with zipfile.ZipFile(folder/(base+'-usb-'+action+'.zip')) as z:
+            if z.testzip():raise ValueError('ZIP CRC failure')
+            names=z.namelist()
+            if len(names)!=len(set(names)):raise ValueError('Duplicate ZIP member')
+            for name in names:
+                p=PurePosixPath(name)
+                if p.is_absolute() or '..' in p.parts or str(p)!=name:raise ValueError('Unsafe ZIP member')
+                if stat.S_IFMT(z.getinfo(name).external_attr>>16)!=stat.S_IFREG:raise ValueError('Nonregular ZIP member')
+            source={n[len(prefix+'/source/'):]:z.read(n) for n in names if n.startswith(prefix+'/source/')}
+            if source!=sources:raise ValueError('USB corresponding source differs')
+            manifest_checks={n:h for h,n in (line.split('  ',1) for line in z.read(prefix+'/SHA256SUMS').decode().splitlines())}
+            if set(manifest_checks)!=(set(names)-{prefix+'/SHA256SUMS'}):raise ValueError('Inner checksum inventory differs')
+            for n,h in manifest_checks.items():
+                if sha(z.read(n))!=h:raise ValueError('Inner checksum differs')
+            info=json.loads(z.read(prefix+'/kit.json'));catalog=json.loads(z.read(prefix+'/catalog.json'))
+            if info['component']!=component or info['catalog_sha256']!=sha(json.dumps(catalog,sort_keys=True,separators=(',',':')).encode()):raise ValueError('Kit/catalog identity mismatch')
+            blobs={n[len(prefix+'/blobs/'):]:z.read(n) for n in names if n.startswith(prefix+'/blobs/')}
+            for h,raw in blobs.items():
+                if sha(raw)!=h:raise ValueError('Corrupt content-addressed payload')
+            needed=set()
+            for state in catalog['states']:
+                transition=policy.transition(catalog,state,component,action)
+                if transition:
+                    needed.update(row['sha256'] for row in transition['files'] if row['sha256'] is not None)
+            if not needed.issubset(blobs):raise ValueError('Kit missing a required installed-set transition blob')
+            # Other add-ons' existing binaries are guards, not shipped payloads.
+            binary_paths={'mala':'usr/lib/lv2/mala.lv2/mala.so','network-link':'usr/lib/lv2/hector-link-sync.lv2/hector_link_sync.so','squelch-box':'usr/lib/lv2/poly303.lv2/poly303.so'}
+            for other,path in binary_paths.items():
+                if other!=component:
+                    h=next(r['files'][path] for r in catalog['states'].values() if r['files'][path] is not None)
+                    if h in blobs:raise ValueError('Unrequested companion binary included')
+            with tempfile.TemporaryDirectory() as work:
+                script=Path(work)/'debug.sh';script.write_bytes(z.read('debug.sh'));r=subprocess.run(['bash','-n',str(script)],capture_output=True,text=True)
+                if r.returncode:raise ValueError('Invalid launcher syntax: '+r.stderr)
+                # Extracted executable sources must at least compile on desktop;
+                # invocation is intentionally rejected before device path reads.
+                for n in ['install.py','installer/catalog.py','installer/transaction.py']:
+                    compile(z.read(prefix+'/'+n),n,'exec')
+    result=dict(status='pass',component=component,version=version,compatibility_revision=2,source_files=len(sources),zip_closure=True,all_optional_transitions_closed=True,corresponding_source_equal=True,other_component_binaries_excluded=True,launcher_syntax=True,hardware_access=False)
+    (folder/'VERIFIED.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result));return result
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--folder',type=Path,default=ROOT/'dist')
-    p.add_argument('--arm-plugin',type=Path,default=ROOT/'artifacts/mala.lv2/mala.so')
-    a=p.parse_args();report=verify(a.folder.resolve(),a.arm_plugin.resolve())
-    out=ROOT/'build/release-verification.json';out.parent.mkdir(exist_ok=True);out.write_text(json.dumps(report,indent=2)+'\n')
+    p=argparse.ArgumentParser();p.add_argument('--folder',type=Path,required=True);a=p.parse_args();verify(a.folder.resolve())

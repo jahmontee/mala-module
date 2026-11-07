@@ -1,3 +1,9 @@
+# 0.2.0-beta.1 · compatibility revision2
+
+Approved v2 interface, defaults, quality/LEDs, envelope and Mono Buffer layout.
+Retained DSP/URI/ports/state. Coordinated beta.6 in-place update and optional
+companion removal. Exact physical USB trial unperformed.
+
 # Changelog
 
 ## 0.1.0-beta.6 — public beta

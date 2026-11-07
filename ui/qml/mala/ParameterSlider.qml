@@ -7,7 +7,7 @@ Item {
     id: root
     property string paramSymbol
     property string title: controls[paramSymbol].name
-    property color accent: "#8ce6c7"
+    property color accent: "#008f98"
     property bool vertical: false
     property string leftText: ""
     property string rightText: ""
@@ -79,19 +79,19 @@ Item {
             radius: width/2; color: root.accent
             opacity: slider.enabled ? 1 : .4
             border.width: slider.pressed || slider.visualFocus ? 2 : 0
-            border.color: "#edf4f7"
+            border.color: "#303932"
         }
     }
     Row {
         visible: !root.vertical
         anchors.bottom: parent.bottom; width: parent.width
-        Label { width: parent.width/3; text: root.leftText; color: "#9caab1"; font.pixelSize: 14 }
-        Label { width: parent.width/3; horizontalAlignment: Text.AlignHCenter; text: root.valueText; color: "#ebf0f4"; font.pixelSize: 16 }
-        Label { width: parent.width/3; horizontalAlignment: Text.AlignRight; text: root.rightText; color: "#9caab1"; font.pixelSize: 14 }
+        Label { width: parent.width/3; text: root.leftText; color: "#596157"; font.pixelSize: 14 }
+        Label { width: parent.width/3; horizontalAlignment: Text.AlignHCenter; text: root.valueText; color: "#303932"; font.pixelSize: 16 }
+        Label { width: parent.width/3; horizontalAlignment: Text.AlignRight; text: root.rightText; color: "#596157"; font.pixelSize: 14 }
     }
     Label {
         visible: root.vertical; anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter
-        text: root.valueText; color: "#ebf0f4"; font.pixelSize: 18
+        text: root.valueText; color: "#303932"; font.pixelSize: 18
     }
     Item {
         objectName: root.paramSymbol + "_notches"; x: slider.x; y: root.height+2; width: slider.width; height: 14
@@ -101,7 +101,7 @@ Item {
             Label {
                 x: slider.leftPadding + (slider.handle ? slider.handle.width/2 : 0) + (slider.availableWidth - (slider.handle ? slider.handle.width : 0))*modelData.position - width/2
                 text: (modelData.value > 0 ? "+" : "") + modelData.value
-                color: "#9caab1"; font.pixelSize: 10
+                color: "#596157"; font.pixelSize: 10
             }
         }
     }

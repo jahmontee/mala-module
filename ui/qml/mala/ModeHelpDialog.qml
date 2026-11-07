@@ -15,9 +15,9 @@ Dialog {
     exit: Transition {}
     title: "Mala · mode reference"
     standardButtons: Dialog.Close
-    Material.theme: Material.Dark
+    Material.theme: Material.Light
     Overlay.modal: Rectangle { color: "#b0000000" }
-    background: Rectangle { color: "#17212b"; border.color: "#456071"; radius: 10 }
+    background: Rectangle { color: "#f1eee5"; border.color: "#91968a"; radius: 10 }
     contentItem: Flickable {
         clip: true
         contentWidth: width
@@ -31,7 +31,7 @@ Dialog {
             wrapMode: Text.WordWrap
             textFormat: Text.RichText
             font.pixelSize: 18
-            color: "#e0e8ed"
+            color: "#303932"
             text: "<h3>One fixed panel</h3>"
                 + "<p>Names and markings stay fixed, like Beads. The processing changes with your patch. Values, connection colors and active-state highlights still update.</p>"
                 + "<h3>Granular processing</h3>"
@@ -44,7 +44,7 @@ Dialog {
                 + "<h3>Density, Seed and Latch</h3>"
                 + "<p>In granular and synthesis operation, Latch enables continuous grains: Density's left side is periodic, its right side random, and its center stops automatic grains. With Latch on and a Seed signal connected, those sides become clock division and trigger probability. With Latch off, Seed gates a burst; at centered Density, each trigger starts one grain. Delay uses the timing rules above.</p>"
                 + "<h3>CV / Random and quality</h3>"
-                + "<p>With no parameter CV connected, the amount slider selects peaky or uniform internal randomness. With CV connected, its right side scales direct modulation and its left side scales CV-controlled randomness. Delay uses slow internal modulation. Turquoise CV captions indicate a connected input; grey indicates unpatched. CV Assignment follows the selected mix control's function, including bank and oscillator/grain blend in synthesis.</p>"
+                + "<p>With no parameter CV connected, the amount knob selects peaky or uniform internal randomness. With CV connected, its right side scales direct modulation and its left side scales CV-controlled randomness. Delay uses slow internal modulation. Turquoise CV captions indicate a connected input; grey indicates unpatched. CV Assignment follows the selected mix control's function, including bank and oscillator/grain blend in synthesis.</p>"
                 + "<p>The four quality choices select recording character in granular/delay operation and output resolution in synthesis. Recording quality and mono/stereo changes wait while frozen. Freeze and Latch highlights show active states without renaming their buttons.</p>"
                 + "<h3>CV input units</h3>"
                 + "<p>Module Settings selects how incoming continuous CV is interpreted. Legacy virtual volts preserves older patches. Hector / Poly units converts stock signals by ×5 before Beads modulation: a pitch signal change of 0.2 represents one volt and one octave at full pitch depth. In wavetable synthesis, root pitch CV tracks independently of the pitch amount.</p>"

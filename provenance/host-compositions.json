@@ -1,0 +1,164 @@
+{
+  "schema": "hector-community/host-compositions/1",
+  "stock_source_commit": "9d83f1a3105de182d83af0580e4cb1afec00f978",
+  "mala_version": "0.1.0-beta.6",
+  "network_package": "0.1.0-beta.2",
+  "link_version": "0.3.0-beta.5",
+  "states": {
+    "stock407": {
+      "modules": [],
+      "files": {
+        "home/debian/UI/show_widget.py": "135e3fc0b8d7120afb77a442c7cc3d204a98017b4f0b0d4bb2a0db8512600654",
+        "home/debian/UI/module_info.py": "86171480bf644feccecda7de518fb21953a2b8c34343f40d5386d012ea15a0be",
+        "home/debian/UI/ingen_wrapper.py": "63ce37cb478b6a6b2c3bd18cc29753fd98d04bcc871a8c29ca1490560861db03",
+        "home/debian/UI/qml/PatchBayEffect.qml": "9c90fd898c70919dd1944efa9de455c7da40779b86cbd414c3256829a8434bef",
+        "home/debian/UI/qml/TitleFooter.qml": "7ec2766281a954a03f4e7ab05f5b9a1040e01f092858ff6cb30621aff59e4da3",
+        "home/debian/UI/qml/ModuleBrowser.qml": "ade695a162da0090010fdc80abb0a82ec644f695608a1827f063fccc24a27b2e",
+        "home/debian/UI/qml/PatchBay.qml": "82274d5de9bc9a5a9e6bb6797ef237aa8746e36adb3f80f7214b3b39b75b14a8",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "9d1f50585a26a103bf5d76aa76c074399566b3912c291760355a83b98d0719fd",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "65a34b3f2245b091d81f73eedd46fdf16c627f7deb8ec1cc8e7847dc183c52e7",
+        "home/debian/UI/qml/ModuleMore.qml": "7d8bf085386d9dcfedc394bf0add31a11f7591db318f157e306d03ebfbd287b1",
+        "home/debian/UI/qml/Spotlight.qml": "bc7788bb943cb5ffd3ff354d12d31d9221090575ee431ceab126c27b1ecdc3d0"
+      }
+    },
+    "squelch-box": {
+      "modules": [
+        "squelch-box"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "ecdc560d9187704ca56469ecb8c174b5941a3cae0f778ef2f5b0ae8bcc31e8b7",
+        "home/debian/UI/module_info.py": "e70538c88da96962872b6ea8269d25906e582d9517bc055d0fd42b5cf6228b1b",
+        "home/debian/UI/ingen_wrapper.py": "dc2c1c0f8805962fe673fd128b76de1c856954a495e4f809ef20d6928964e93f",
+        "home/debian/UI/qml/PatchBayEffect.qml": "80478f6b1e8afff844edc6fc2c58054b011cf149a40dee4242617cd86bae40de",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "c72b45adcf9c22114839aaab564fc0761e67f844622612a699e628d34ae53d0e",
+        "home/debian/UI/qml/PatchBay.qml": "c14b1a16c00a7369c01c94e5e646348cf1d43dead871bf9a82379cd298c75679",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "56d497e770d1ad0c91fc29b5cd3b8bbef86e4d8172549f9e2125cc3ec3ed859c",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "a8ca81fe1f4575d6bb83e3671c2bd31a71d238f6d7edda219cf5b413c579864a",
+        "home/debian/UI/qml/ModuleMore.qml": "e47c25e8c950a66cdce54453274a7ba5d0dd5e486963254d41c6a0774eb3b84f",
+        "home/debian/UI/qml/Spotlight.qml": "b8fc5ab22e35ed15c7d06698b5c94bd057657c74a59cebee19b711584dde203e",
+        "home/debian/UI/qml/poly303/catalog.js": "6fdb8a7ca0f468266803a39444d74f93e8b662bf1c35339129fef30e259d396f"
+      }
+    },
+    "network-link": {
+      "modules": [
+        "network-link"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "840bd039551f459337f6c3334ca0123fbf26f83f45739303659d53293af1cc77",
+        "home/debian/UI/module_info.py": "6cd2bb80042d521387fa8f68e29eb9ca943988536c093141a81b9692c822fb63",
+        "home/debian/UI/ingen_wrapper.py": "48e192632100c5f9d4a778adc1b948b41a60e0af28578c40ad1e6a4339a10646",
+        "home/debian/UI/qml/PatchBayEffect.qml": "3baa34b21b9927c7e6964f953f7a98bba80d81d25d8391a5321020ce151db3a1",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "40163c8a68559b4694684b53c1fa7342457a011e84c245521f31065be2d8610e",
+        "home/debian/UI/qml/PatchBay.qml": "9242f7f14605f8cfda3ad6efd57487affbfb4146edb682a9a4a2e4a87093a0b8",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "945dba7b96e0009d712c1c3f0a1ab6c9446f20f402819ffc1a9d51330f154f70",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "71c01a24179fe622814d04b69c9a0dac43140273f7cc1f0125f32affefdb580c",
+        "home/debian/UI/qml/ModuleMore.qml": "6db374d8c31530006de092430e62a95ceca1e0fe23a0050395ecc672614f1757",
+        "home/debian/UI/qml/Spotlight.qml": "845d7ea01793c3e543012bc15e54e48a60f1cceb1be1d7dedb9beb28932b9be7",
+        "home/debian/UI/qml/link/catalog.js": "06317e92fa6cc575a36685e29ce2755f07f2df087d6aa974a31e48fded8cc772"
+      }
+    },
+    "network-link+squelch-box": {
+      "modules": [
+        "network-link",
+        "squelch-box"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "fd73d4698726092f5ccab75af402dd063c5e31bbc36e7285f71f71dfb7f7045b",
+        "home/debian/UI/module_info.py": "deeaa25a7c2cc9458d6dd192d9f25977fccc2c5bfe1befd98786de3e34faf57d",
+        "home/debian/UI/ingen_wrapper.py": "79899dbbb7296acb0950e985d774719dbae34adc5e2721795a28258389770547",
+        "home/debian/UI/qml/PatchBayEffect.qml": "a3f5c8acf5897a779b43649a506d39b8607fa217a8fae9673a9cb07b5ce99a52",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "06a6da3db733eef006d7ba8fd26fbb09e683202a36d86e9dbc3965b1bc24c492",
+        "home/debian/UI/qml/PatchBay.qml": "c14b1a16c00a7369c01c94e5e646348cf1d43dead871bf9a82379cd298c75679",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "56d497e770d1ad0c91fc29b5cd3b8bbef86e4d8172549f9e2125cc3ec3ed859c",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "a8ca81fe1f4575d6bb83e3671c2bd31a71d238f6d7edda219cf5b413c579864a",
+        "home/debian/UI/qml/ModuleMore.qml": "e47c25e8c950a66cdce54453274a7ba5d0dd5e486963254d41c6a0774eb3b84f",
+        "home/debian/UI/qml/Spotlight.qml": "e6a2137540979083bb365969d2c54126ffac8d61537b0f8786e196d5987e1a62",
+        "home/debian/UI/qml/link/catalog.js": "06317e92fa6cc575a36685e29ce2755f07f2df087d6aa974a31e48fded8cc772",
+        "home/debian/UI/qml/poly303/catalog.js": "269428d9d3545ac77589cd8e1e437038fa1b6a87cde0cef6f08396c6f853e1ff"
+      }
+    },
+    "mala": {
+      "modules": [
+        "mala"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "7fcc9b06ff7b2a5cc47226ad08b975577a13f063f08476da1d8e36c66d822c40",
+        "home/debian/UI/module_info.py": "f6505e4914e07a58a9d0cd691aebe9601950435c90e5b704da5616fa5950a90a",
+        "home/debian/UI/ingen_wrapper.py": "6c673f5240637cf339354237757970ee82df9b7e86d3a4e408bfbb6b03393582",
+        "home/debian/UI/qml/PatchBayEffect.qml": "42b7c5d74e79a7d232f8ce7d028680bc3e777a07ba7157af9db54ba3b458c38e",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "1149b30453cba0b78f7f95d3e60b55a437651ff20280ef25e3ba225584023f0e",
+        "home/debian/UI/qml/PatchBay.qml": "8bf53089b42b0c2a50d1beb81e92015c601debb9b55bb096446c0387431f6d11",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "aff0b76497f3ec0d3a6415904a2d8fe6345e501d53efe732d6901981bd0bbb75",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "86792f02addcb8cfe4c6d0bc5b6eb452e996f8198e71a698afa172726e8e5315",
+        "home/debian/UI/qml/ModuleMore.qml": "8014668595e9042e092360166851412f00628f1398f89d65e5f15c5461caadbe",
+        "home/debian/UI/qml/Spotlight.qml": "688f74191101d06cff41936b27219095e725f994d2d66eb6a8e2ca8967f8e8da"
+      }
+    },
+    "mala+squelch-box": {
+      "modules": [
+        "mala",
+        "squelch-box"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "4250ab53f5b5fc22a0cd36e80a45e79c35ce52f5835d05549e6b668ccaa3b522",
+        "home/debian/UI/module_info.py": "78a385c57aa6ffb180bf3d60ea133c2d563afafbcdb68085e2d8bb842b61a9d1",
+        "home/debian/UI/ingen_wrapper.py": "c73320b98a9ddcef2fe46b1a391939552e2245cd2bc5e85a0db383e29d130ba1",
+        "home/debian/UI/qml/PatchBayEffect.qml": "896a1636b7df970bd2a94fdb822eee772777bf505e5b5b62550d065d58e3c604",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "25a8a6e3e0daf8de5a1425f076faf8971bc25f279f31aadc3a59984744f72216",
+        "home/debian/UI/qml/PatchBay.qml": "c14b1a16c00a7369c01c94e5e646348cf1d43dead871bf9a82379cd298c75679",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "56d497e770d1ad0c91fc29b5cd3b8bbef86e4d8172549f9e2125cc3ec3ed859c",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "a8ca81fe1f4575d6bb83e3671c2bd31a71d238f6d7edda219cf5b413c579864a",
+        "home/debian/UI/qml/ModuleMore.qml": "e47c25e8c950a66cdce54453274a7ba5d0dd5e486963254d41c6a0774eb3b84f",
+        "home/debian/UI/qml/Spotlight.qml": "b8fc5ab22e35ed15c7d06698b5c94bd057657c74a59cebee19b711584dde203e",
+        "home/debian/UI/qml/poly303/catalog.js": "e1b93adc7bb46af340fcc7c620fce0dbbde353555370bffc0adfec4a3ea1c318"
+      }
+    },
+    "mala+network-link": {
+      "modules": [
+        "mala",
+        "network-link"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "1528a125752d62782c31108ab03ffbdcd24a7dc485afb8ce52013ba7ebd9a5b9",
+        "home/debian/UI/module_info.py": "941d01e22ec475c273e42b964e1b09ed8aed83ef52a03ed7313904bdd9a3a22a",
+        "home/debian/UI/ingen_wrapper.py": "82f7ab232d60deaa32ccfa2cd1f68abf9f8c52c6d9ed27093b3183878c78e650",
+        "home/debian/UI/qml/PatchBayEffect.qml": "0352fa41429b023f9699ed63f40a42b5ffd263fa5f15e5871d10ffdcfa913b62",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "40a4075afd69ceb51e8bff891129aa8d38a9e9f27c666c1c4b21101023accbd0",
+        "home/debian/UI/qml/PatchBay.qml": "9242f7f14605f8cfda3ad6efd57487affbfb4146edb682a9a4a2e4a87093a0b8",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "945dba7b96e0009d712c1c3f0a1ab6c9446f20f402819ffc1a9d51330f154f70",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "71c01a24179fe622814d04b69c9a0dac43140273f7cc1f0125f32affefdb580c",
+        "home/debian/UI/qml/ModuleMore.qml": "6db374d8c31530006de092430e62a95ceca1e0fe23a0050395ecc672614f1757",
+        "home/debian/UI/qml/Spotlight.qml": "845d7ea01793c3e543012bc15e54e48a60f1cceb1be1d7dedb9beb28932b9be7",
+        "home/debian/UI/qml/link/catalog.js": "86c460184aa67e016433b97e7bb933e73706fbaa6ab782bdd9731f568436e075"
+      }
+    },
+    "mala+network-link+squelch-box": {
+      "modules": [
+        "mala",
+        "network-link",
+        "squelch-box"
+      ],
+      "files": {
+        "home/debian/UI/show_widget.py": "8dc925e645562978b9d50eeacc5dbee10b0216728bafdaaa5658a4fcd6cd085f",
+        "home/debian/UI/module_info.py": "23e95df241970fe30f1c07f8186a0bf39f121f33a76a9458b0fcdd95df8b5f32",
+        "home/debian/UI/ingen_wrapper.py": "8e2ab5788e493b6533b76d7a2e506e62276dba8a552ec94a14090a0b305c04a3",
+        "home/debian/UI/qml/PatchBayEffect.qml": "641066fa6db2d4955778a38889cabf7e408bc6dbee1a8f6d87a2db80596ee0a9",
+        "home/debian/UI/qml/TitleFooter.qml": "9bb891ffba3a1d9e2457358c8746586586f9737892e1c3e515585f12d16f47c4",
+        "home/debian/UI/qml/ModuleBrowser.qml": "b4754003bdb1ee386a7ccf94fa03c961b72874bd9d3e67e906f642e8f677dc67",
+        "home/debian/UI/qml/PatchBay.qml": "c14b1a16c00a7369c01c94e5e646348cf1d43dead871bf9a82379cd298c75679",
+        "home/debian/UI/qml/ValueButtonsSlider.qml": "56d497e770d1ad0c91fc29b5cd3b8bbef86e4d8172549f9e2125cc3ec3ed859c",
+        "home/debian/UI/qml/MultiValueButtonsSlider.qml": "a8ca81fe1f4575d6bb83e3671c2bd31a71d238f6d7edda219cf5b413c579864a",
+        "home/debian/UI/qml/ModuleMore.qml": "e47c25e8c950a66cdce54453274a7ba5d0dd5e486963254d41c6a0774eb3b84f",
+        "home/debian/UI/qml/Spotlight.qml": "e6a2137540979083bb365969d2c54126ffac8d61537b0f8786e196d5987e1a62",
+        "home/debian/UI/qml/link/catalog.js": "86c460184aa67e016433b97e7bb933e73706fbaa6ab782bdd9731f568436e075",
+        "home/debian/UI/qml/poly303/catalog.js": "269428d9d3545ac77589cd8e1e437038fa1b6a87cde0cef6f08396c6f853e1ff"
+      }
+    }
+  }
+}

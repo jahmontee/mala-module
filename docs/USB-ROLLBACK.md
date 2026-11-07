@@ -1,42 +1,40 @@
-# USB rollback — Mala 0.1.0-beta.6
+# USB rollback and recovery · Mala v2 0.2.0-beta.1 · compat.2
 
-This kit restores the exact files and metadata saved by this public beta's
-installer on this Hector. It removes only unchanged additions recorded by that
-transaction. No SSH, network connection or SD-card removal is required when the
-normal USB startup service is still working.
+Experimental candidate. This exact rollback kit has no physical trial.
+Read COMPATIBILITY.md and back up wanted patches before removal.
 
-1. Save wanted patch edits. On a computer, prepare a dedicated single-partition
-   FAT32 thumb drive using `mala-hector-0.1.0-beta.6-usb-rollback.zip`.
-2. Extract it directly to the drive root: `debug.sh`, `mala/`, and
-   `READ-ME-FIRST.txt`. Remove the install kit from this drive first; the two
-   `debug.sh` files perform different actions. Safely eject the drive.
-3. Shut Hector down normally, insert the rollback drive, and start it.
-4. The kit checks this Hector's backup and current file hashes, pauses screen/audio,
-   restores the originals, verifies them, and requests one normal reboot.
-5. Keep the drive inserted through reboot. The final USB `MALA-RESULT.txt` status
-   should be **ROLLBACK VERIFIED**. Remove the drive after the normal screen returns.
+## Remove Mala
 
-**Leave the rollback drive disconnected during normal use.** Rebooting again
-with the drive inserted is a release-validation test, not a required removal step.
+1. Download mala-hector-0.2.0-beta.1-compat.2-usb-rollback.zip and compare its
+   SHA256SUMS entry from the same release.
+2. Extract the complete ZIP onto a dedicated, single-partition FAT32 drive.
+   debug.sh, mala/ and READ-ME-FIRST.txt must be at the root. Use one kit per
+   drive. Safely eject it.
+3. Save wanted edits, stop playback, power off, insert USB and power on.
+   Do not press the vendor Firmware Update button.
+4. Keep power/USB connected through the normal automatic reboot and subsequent
+   verification. If Mala is already absent, verification needs no write/reboot.
+5. Confirm Mala is absent from the browser, remove USB after startup and read
+   MALA-RESULT.txt on a computer for **ROLLBACK VERIFIED**.
 
-The rollback drive does not repeat a completed removal. An interrupted publication
-or restoration can be resumed from the authenticated transaction when its files
-still match known original or candidate states. A stale reservation is retired
-only if its worker is inactive. A still-running worker is never interrupted.
+Removal retains recognized Squelch Box and Network/Link components and composes
+the shared UI for that remaining set. Presets, frozen recordings and network
+profiles remain user data. Patches containing Mala still need Mala for its sound.
 
-Unknown file edits, altered metadata, missing/corrupt backups, a different device,
-or a different beta cause refusal before restoration writes. Keep the report and
-get help; do not delete transaction files or force removal. Other files you add
-to Mala's directories are preserved.
+**Rollback removes Mala.** It does not return a completed v2 update to the
+beta.6 interface. A completed-version downgrade needs a separately reviewed
+path. No such downgrade kit is included in this release.
 
-Removal preserves saved patches and frozen-buffer assets. Patches containing Mala
-will reference a missing plugin until Mala is installed again; retain a pre-beta
-patch for use without it. The normal interface and existing DSP files are restored.
+## Recover an interrupted operation
 
-The USB path depends on enough of firmware 407 starting to mount the drive and
-run its debug startup service. It cannot promise recovery from a damaged SD card,
-a power interruption, or a system that cannot reach that service. Existing SD
-backups/offline recovery remain the fallback. Public-kit rollback and its
-automatic post-reboot verification passed on the one407 backup-card trial
-described in VALIDATION.md. Physical power-loss and unbootable-device recovery
-remain unvalidated.
+For an incomplete Mala transaction, the matching rollback kit restores exact
+starting software from authenticated originals. An interrupted beta.6 upgrade
+can therefore recover beta.6. Backups stay on that Hector in
+/mnt/hector-community-beta/. Never move, delete or publish them.
+Finish older compat.1 interruptions with the original matching kit first.
+
+After **RECOVERY VERIFIED; NO RETRY**, the same action stays blocked from
+repeating automatically. Follow the result to acknowledge once with the
+opposite kit, then deliberately choose your next action. Unknown later edits
+stop recovery rather than being overwritten. **RECOVERY REQUIRED** needs
+maintainer attention. USB recovery of an unbootable device is unqualified.

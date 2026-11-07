@@ -23,6 +23,12 @@ FRESH = ('input_stage', 'synth_enable', 'buffer_autosave', 'output_normalization
 PANEL = ('time', 'size', 'shape', 'pitch', 'density', 'time_amount', 'size_amount',
          'shape_amount', 'pitch_amount', 'feedback', 'mix', 'reverb')
 
+# Apply only after the host explicitly requests a new Mala instance. Keep LV2
+# metadata/legacy fallback defaults intact for existing saved patches.
+FRESH_KNOB_DEFAULTS = dict(time=.5, size=.5, shape=.5, pitch=0., density=.5,
+    time_amount=0., size_amount=0., shape_amount=0., pitch_amount=0.,
+    feedback=0., mix=.5, reverb=0.)
+
 
 def prototype(entry):
     """Additive catalog entry; LV2 defaults/ranges remain the port contract."""
@@ -291,6 +297,8 @@ class MalaHub(QObject):
         if self.loading.value: return
         for identifier in sorted(self.fresh):
             for s in FRESH: self.knobs.ui_knob_change(identifier, s, 1.)
+            for s in PANEL:
+                self.knobs.ui_knob_change(identifier, s, FRESH_KNOB_DEFAULTS[s])
             self.knobs.ui_knob_change(identifier, 'cv_input_units', float(self.hardware == 'hector'))
         self.fresh.clear()
         if self.topology_dirty:
