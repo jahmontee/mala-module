@@ -30,10 +30,10 @@ Read VALIDATION.md, KNOWN-LIMITATIONS.md and COMPATIBILITY.md.
    at noon stops automatic grains. Move it away from center or use Seed.
 
 Recognized public beta.6 updates in place, keeping the same module URI/ports.
-Other recognized add-ons remain installed. Unknown versions or edits are
-refused before firmware writes, with a reason in the report. Do not remove a
-companion to bypass a compatibility refusal. Use coordinated revision2 kits
-for subsequent companion changes. Older stock-only/compat.1 tools lack v2 support.
+The installer preserves saved data and checks the recognized shared UI state.
+Unknown versions or edits are refused before firmware writes, with a reason
+in the result report. Do not overwrite files to bypass a compatibility refusal.
+Use this release's matching install and rollback kits.
 
 ## Problems or interrupted installation
 

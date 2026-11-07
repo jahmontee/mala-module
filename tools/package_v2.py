@@ -17,8 +17,7 @@ sys.path.insert(0, str(ROOT / 'installer'))
 import catalog as policy
 from transaction import canonical
 
-PREFIXES = {'mala': 'mala-hector', 'network-link': 'network-link-hector',
-            'squelch-box': 'squelch-box-hector'}
+PREFIXES = {'mala': 'mala-hector'}
 EXCLUDE = {'.git', 'build', 'dist', 'artifacts', '__pycache__'}
 RUNTIME = ('install.py', 'installer/transaction.py', 'installer/catalog.py')
 
@@ -64,15 +63,15 @@ def tar_bytes(files, prefix):
 
 
 def own_payload(component, payload_root):
+    if component != 'mala':
+        raise ValueError('This repository packages Mala only')
     if payload_root is not None:
         files = {path.relative_to(payload_root).as_posix(): path.read_bytes()
                  for path in payload_root.rglob('*')
                  if path.is_file() and '__pycache__' not in path.parts}
     else:
-        if component == 'network-link':
-            raise ValueError('Provide the reviewed Network/Link component payload root')
-        bundle = 'mala.lv2' if component == 'mala' else 'poly303.lv2'
-        library = 'mala.so' if component == 'mala' else 'poly303.so'
+        bundle = 'mala.lv2'
+        library = 'mala.so'
         files = {}
         for folder, prefix in [('ui', 'home/debian/UI/'), ('bundle', 'usr/lib/lv2/' + bundle + '/')]:
             for path in (ROOT / folder).rglob('*'):
@@ -86,6 +85,8 @@ def own_payload(component, payload_root):
 
 
 def package(component, output, payload_root=None):
+    if component != 'mala':
+        raise ValueError('This repository packages Mala only')
     if output.exists():
         raise ValueError('Choose a fresh output folder')
     release = json.loads((ROOT / 'release.json').read_text())

@@ -17,9 +17,9 @@ Read COMPATIBILITY.md and back up wanted patches before removal.
 5. Confirm Mala is absent from the browser, remove USB after startup and read
    MALA-RESULT.txt on a computer for **ROLLBACK VERIFIED**.
 
-Removal retains recognized Squelch Box and Network/Link components and composes
-the shared UI for that remaining set. Presets, frozen recordings and network
-profiles remain user data. Patches containing Mala still need Mala for its sound.
+Removal restores the appropriate recognized shared UI state. Presets, frozen
+recordings and settings remain user data. A saved patch containing Mala still
+needs Mala to reproduce its sound.
 
 **Rollback removes Mala.** It does not return a completed v2 update to the
 beta.6 interface. A completed-version downgrade needs a separately reviewed

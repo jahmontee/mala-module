@@ -1,57 +1,43 @@
-# Compatibility and update behavior
+# Mala compatibility and update behavior
 
 This experimental candidate targets Hector firmware 407, AArch64 at 48 kHz.
-Admission uses exact public source/file identities. Beebo and unknown firmware
-or modified shared files are refused before firmware writes.
+Beebo, other firmware and unknown modified target files are refused before
+firmware writes. Exact file identities are checked, rather than relying only
+on a displayed version number.
 
-| Module | Candidate support |
-| --- | --- |
-| Stock Hector 407 modules | Retained by the recognized public host compositions |
-| Public Mala 0.1.0-beta.6 | In-place update to 0.2.0-beta.1, with or without recognized companions |
-| Mala v2 0.2.0-beta.1 | Matching installer verifies existing installation without repeating writes |
-| Squelch Box 0.1.0-beta.5 | Optional, coordinated compatibility revision2 kit |
-| Network Connection 0.1.0-beta.2 + Ableton Link sync 0.3.0-beta.5 | Optional combined package, coordinated compatibility revision2 kit |
-| Echo Field / XL, Orbit / Polyrhythm, 4×4, Cardinal, Oscilloscope | Public USB combinations pending review of exact versions and shared files |
-| Sample Box / Legacy, BiPoSeq / external-clock | Public USB combinations pending exact integration review |
-| Link audio receiver / sender | Separate from Link sync, public USB combination pending |
-| Private lab builds and future versions | Require a reviewed catalog migration before installation |
+## Install and update
 
-Software admission/preservation checks do not establish real-time audio
-headroom for every combination. Physical acceptance of this exact USB family
-remains unperformed.
+The USB install kit installs Mala on the recognized407 baseline and updates
+recognized public Mala 0.1.0-beta.6 to 0.2.0-beta.1 in place. Its URI, 58 ports and
+saved-state format are retained. Existing patches still refer to the same
+Mala. A matching installed v2 is verified without another write or reboot.
 
-All three recognized add-ons are optional. The catalog contains eight v2
-installed sets and four additional beta.6 upgrade sets. An add-on can be added
-or removed independently in any order using coordinated revision2 kits.
-The installer composes shared host files for the remaining set and guards
-other components' files and metadata.
+Replaced files and metadata are backed up before changes. The installer writes
+Mala and only the shared UI integration required for the recognized starting
+state. Unchanged files are guards. Presets, frozen recordings and settings
+remain user data. Unknown shared-source changes require review before updating.
 
-The same Mala URI and ports remain in place. Updating recognized beta.6 replaces
-its existing interface and bridge after backing up originals. Existing patches
-still refer to that same Mala. Add Module still creates as many separate patch
-instances as the user chooses.
+## Removal and recovery
 
-The matching USB rollback kit removes Mala and retains recognized companions.
-It does not automatically restore the beta.6 interface. An interrupted upgrade
-uses authenticated originals to restore its exact starting software set.
-A deliberate completed-version downgrade needs a separately reviewed path.
-Software removal preserves saved patches and frozen recordings.
+The matching USB rollback removes Mala and restores the appropriate recognized
+shared UI state. It does not restore the beta.6 interface after a completed v2
+update. A deliberate completed-version downgrade needs a separate reviewed
+procedure, which this release does not provide.
 
-Verified compat.1 inventories can migrate to revision2 only after their HMAC,
-device binding, exact installed state and authenticated latest transaction
-verify. Finish an older incomplete operation with its original recovery kit.
-After migration use revision2 companion kits. Older compat.1 tools refuse the
-new catalog. Preserve all private backup folders on Hector.
+Interrupted-operation recovery restores exact starting files from the device's
+authenticated originals. An interrupted beta.6 upgrade can therefore recover
+beta.6. Finish an older incomplete operation with its original matching kit
+before using this release. Preserve private backup folders and journals.
 
-## Rule for future modules and updates
+## Future Mala updates
 
-Every release must review this complete module list and the current project
-register. Review shared dispatch, catalogs, routing, clocks, defaults,
-parameter controls, saved-state handling and service ownership. Add exact
-version identities and compositions, test installation/update/removal order
-and interruption recovery, and update this matrix. Preserve stable module URIs
-and port/state contracts or provide an explicit migration.
+An update must keep the module identity and saved-patch contract, or include an
+explicit migration. Review shared UI integration, routing, clocks, parameter
+controls, metadata, defaults and state restoration. Validate update, removal,
+postboot verification and interruption recovery for exact recognized files.
+Unknown future versions remain pending until reviewed. Source and checksums
+must match the exact release commit.
 
-Future compatibility is a continuing release requirement. A changed version
-is pending until its actual code and file interactions have been reviewed.
-Unknown builds must fail safely rather than overwrite another integration.
+The exact v2 USB kit has computer-only validation. Earlier private UI use and
+public beta.6 USB testing are separate evidence. Physical exact-kit testing,
+long-run audio/touch/MIDI/CV and loaded-patch headroom remain unqualified.

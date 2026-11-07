@@ -33,7 +33,7 @@ above blue, orange and pink.
 Shared source images are cached. Decode sizes are bounded to the display needs;
 this is not a full-screen picture with invisible controls placed over it.
 
-The twelve knobs retain Echo Field's vertical gesture: 160 pixels per complete
+The twelve knobs retain the approved vertical gesture: 160 pixels per complete
 range, one-percent panel steps, a single wheel step per event, and double-tap to
 minimum. Mala's existing native Beads response conversion is unchanged. The numerical
 readouts and four lower colored badges are temporarily hidden for visual review.

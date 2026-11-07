@@ -8,6 +8,6 @@ Validation performed:
 
 Note any parameter/preset compatibility or installer/rollback implications.
 
-- [ ] Reviewed the complete compatibility module list and shared host hooks
-- [ ] Checked in-place update and independent companion removal paths
-- [ ] Updated exact version/catalog identities and recorded pending combinations
+- [ ] Reviewed Mala compatibility and required shared host hooks
+- [ ] Checked Mala in-place update and removal paths
+- [ ] Updated exact Mala version/catalog identities and recorded remaining limits

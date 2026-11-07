@@ -37,17 +37,17 @@ part of the display without changing parameters. Numeric touch popups and hover
 tooltips stay hidden along with the numerical readouts. The three mix-control
 badges and the four quality-color stripes remain visible.
 
-## Echo Field knob movement
+## Knob movement
 
-The interaction follows the owner's preferred Echo Field knob implementation:
+The interaction follows the approved Mala knob interaction:
 
 - Drag straight up to increase and down to decrease.
 - A 160-pixel vertical drag covers the full panel range.
 - Touching a knob does not jump its value to the contact point.
 - Horizontal motion does not adjust the knob.
 - Movement uses one-percent panel-position steps; one mouse-wheel event moves
-  one step, matching Echo Field's default behavior.
-- Double-click/double-tap resets to the minimum, as in Echo Field. For Pitch this
+  one step, using the same one-percent increment.
+- Double-click/double-tap resets to the minimum, with the approved gesture. For Pitch this
   means the lowest pitch setting, not center; for attenurandomizers it means the
   negative endpoint. This gesture is suppressed during MIDI selection.
 

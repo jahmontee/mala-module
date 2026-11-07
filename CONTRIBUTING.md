@@ -21,8 +21,7 @@ reproduction steps and whether it occurs in a minimal patch. Installation issues
 can include a redacted MALA-RESULT.txt and the tail of COMMUNITY-LAUNCHER.log. Review
 logs for personal data before posting; never attach private installer directories or journals.
 
-Review every module listed in docs/COMPATIBILITY.md before a new module/update.
-Preserve module identity and saved-state contracts or provide a migration.
-Test install, in-place update, independent removal, catalog migration and
-recovery against exact recognized companion versions. Update pending cases
-honestly. Future compatibility requires continuing release review.
+Review docs/COMPATIBILITY.md before a Mala update. Preserve its identity and
+saved-state contract or provide an explicit migration. Test install, in-place
+update, removal, catalog migration and recovery for recognized files. Keep
+unknown-source admission and hardware-test limits explicit.

@@ -1,11 +1,9 @@
 # Public Mala release source
 
 Read docs/COMPATIBILITY.md before changing or packaging a module. Review the
-complete companion list and shared integration files for every update. Keep
+Mala compatibility rules and shared integration files for every update. Keep
 module identity, port/state contracts and existing saved values stable unless
-an explicit migration is supplied. Preserve other modules' bytes, metadata,
-services and user data. Validate install, in-place update, independent removal,
-postboot idempotence and recovery for the exact recognized versions. Unknown
+an explicit migration is supplied. Preserve unrelated file bytes, metadata, services and user data. Validate install, in-place update, removal, postboot idempotence and recovery for exact recognized files. Unknown
 versions must be refused before target writes. Update the compatibility matrix
 and validation scope honestly. Preparation does not authorize hardware access.
 

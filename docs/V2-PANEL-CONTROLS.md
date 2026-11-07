@@ -2,7 +2,7 @@
 
 Size and Shape now follow the hardware-panel arrangement: names and values sit
 below the knobs, with function symbols around their rims. Their actual control
-positions and Echo Field drag behavior are unchanged.
+positions and Mala drag behavior are unchanged.
 
 ![Mala Size/Shape panel with Freeze and Seed active](images/mala-v2-freeze-seed-yellow.png)
 

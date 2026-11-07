@@ -10,10 +10,10 @@ body:
     validations:
       required: true
   - type: textarea
-    id: companions
+    id: installation_history
     attributes:
-      label: Other installed modules and versions
-      description: Include Network/Link, Squelch Box and any other community modules, plus USB kit revision and installation order.
+      label: Mala installation history
+      description: Include the previous Mala version, USB kit revision and whether firmware/UI files were modified.
     validations:
       required: true
   - type: dropdown

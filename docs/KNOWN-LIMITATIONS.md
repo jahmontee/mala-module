@@ -4,9 +4,8 @@
   unknown shared-source modifications are refused before target writes.
 - These exact v2 USB kits have no physical trial. Earlier beta.6 USB testing and
   private v2 UI use are separate evidence. GitHub CI is pending on final source.
-- COMPATIBILITY.md lists recognized versions. Echo Field/XL, Orbit/Polyrhythm,
-  4×4, Cardinal, Oscilloscope and Link audio receiver/sender public combinations
-  remain pending. Future versions require catalog review.
+- COMPATIBILITY.md describes recognized firmware/UI states. Unknown source
+  modifications and future Mala versions need review before installation.
 - Public beta.6 updates in place. Successful USB rollback removes Mala.
   Downgrading a completed update to beta.6 needs a separate reviewed procedure.
 - Fresh Density starts at noon, stopping automatic grains. Move it away from

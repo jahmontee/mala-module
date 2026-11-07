@@ -28,18 +28,19 @@ An 8 GB drive is ample. Normal installation needs no SSH or internet access.
 Public Mala beta.6 updates **in place**, with its same URI and 58 ports.
 Replaced files are backed up before writing. Existing patches refer to the same
 module. The [rollback kit](docs/USB-ROLLBACK.md) removes Mala and retains
-recognized companions. Returning to the old interface after a completed update
+the recognized shared UI state. Returning to the old interface after a completed update
 is a separate downgrade operation.
 
 ## Compatibility
 
-Coordinated revision2 kits support optional Squelch Box 0.1.0-beta.5 and combined
-Network Connection 0.1.0-beta.2 / Ableton Link sync 0.3.0-beta.5 in any installation
-or independent removal order. Use revision2 companion kits after migrating.
-See [the full compatibility list](docs/COMPATIBILITY.md), including pending
-Echo Field/XL, Orbit/Polyrhythm, 4×4, Cardinal, Oscilloscope and Link audio
-receiver/sender combinations. Unknown shared-file changes are refused before
-writing. Future releases must review and extend this compatibility list.
+For Hector firmware407, with an exact guarded update path from public Mala
+0.1.0-beta.6. The installer checks recognized firmware/UI files and preserves
+saved data. Unknown source modifications are refused before firmware writes.
+Read [compatibility and update behavior](docs/COMPATIBILITY.md).
+
+This release contains only Mala. Install, removal and future updates must retain
+its module identity and saved-patch contract, with explicit migrations for
+changed file layouts or versions.
 
 ## Fresh defaults and controls
 
