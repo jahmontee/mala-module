@@ -1,11 +1,11 @@
-# USB install or update · Mala v2 0.2.0-beta.1 · compat.2
+# USB install or update · Mala v2 0.2.0-beta.1 · compat.2 · slim.1
 
 Experimental candidate for Hector 407. Exact-kit physical testing is unperformed.
 Read VALIDATION.md, KNOWN-LIMITATIONS.md and COMPATIBILITY.md.
 
 ## Prepare on a computer
 
-1. Download mala-hector-0.2.0-beta.1-compat.2-usb-install.zip, the matching
+1. Download mala-hector-0.2.0-beta.1-compat.2-slim.1-usb-install.zip, the matching
    rollback ZIP and SHA256SUMS from the same release. Compare the archive
    checksum. Checksums detect corruption without providing a publisher signature.
 2. Use a dedicated drive with one writable FAT32 partition. An 8 GB drive is
@@ -47,3 +47,7 @@ the opposite matching kit once, then deliberately retry if desired.
 **RECOVERY REQUIRED** needs the matching rollback kit and maintainer attention.
 Avoid repeated installation attempts. USB recovery requires normal startup;
 an unbootable device may need offline SD recovery.
+
+Packaging slim.1 retains the same installer, DSP and runtime graphics.
+Documentation images are omitted from the USB source copy. The current
+screenshot is available on GitHub.

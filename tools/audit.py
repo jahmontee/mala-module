@@ -30,13 +30,6 @@ def audit():
             assert hashlib.sha256(raw).hexdigest()==row['sha256'],name
             assert len(raw)==row['bytes'],name
             large_images.add(name)
-        reference=artwork['reference']
-        assert reference=='docs/images/mala-v2-approved-concept.png'
-        assert hashlib.sha256((ROOT/reference).read_bytes()).hexdigest()==artwork['reference_sha256']
-        large_images.update([reference,'docs/images/mala-v2-artwork-preview.png',
-            'docs/images/mala-v2-quality-preview.png','docs/images/mala-v2-quality-menu.png',
-            'docs/images/mala-v2-size-shape-preview.png','docs/images/mala-v2-freeze-seed-yellow.png',
-            'docs/images/mala-v2-badges-preview.png','docs/images/mala-v2-clean-preview.png'])
     upstream_literals=set()
     for name,h in release['stock_sha256'].items():
         raw=(ROOT/'tests/fixtures/stock407'/name).read_bytes()

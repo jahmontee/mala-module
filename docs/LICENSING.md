@@ -20,7 +20,8 @@ notices and the Qt alternative-license notice remain intact.
 The USB ZIPs include their complete corresponding project source under
 `mala/source/`, including the modified UI source, original selected public 407
 preimages, exact integration patch, locked portable Beads/stmlib sources, build
-overlays and build scripts. The separate source archive contains the same source.
+overlays and build scripts. The separate source archive contains the same program source and runtime
+assets, plus the finished documentation screenshot omitted from the USB kits.
 The retained ARM binary is the accepted Mala DSP. The v2 release changes the
 interface, fresh-add initialization and coordinated compatibility packaging. No network fetch is required to compile the source.
 

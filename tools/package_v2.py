@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Build deterministic compatibility revision2 archives from reviewed local files."""
+"""Build compact Mala USB archives from reviewed local files."""
 import argparse
 import gzip
 import hashlib
@@ -20,6 +20,13 @@ from transaction import canonical
 PREFIXES = {'mala': 'mala-hector'}
 EXCLUDE = {'.git', 'build', 'dist', 'artifacts', '__pycache__'}
 RUNTIME = ('install.py', 'installer/transaction.py', 'installer/catalog.py')
+
+
+def usb_source_files(source):
+    """Keep complete code/runtime artwork while omitting optional documentation images."""
+    image_suffixes = {'.png', '.jpg', '.jpeg', '.webp', '.gif'}
+    return {name: raw for name, raw in source.items()
+            if not (name.startswith('docs/images/') and Path(name).suffix.lower() in image_suffixes)}
 
 
 def sha(raw):
@@ -105,10 +112,14 @@ def package(component, output, payload_root=None):
                 version=catalog['components'][component]['version'], compatibility_revision=2,
                 catalog_sha256=sha(canonical(catalog)))
     source = source_files()
+    usb_source = usb_source_files(source)
+    package_revision = release['package_revision']
+    if package_revision != 'slim.1':
+        raise ValueError('This reviewed packager requires packaging revision slim.1')
     common = {name: source[name] for name in RUNTIME}
     common['kit.json'] = (json.dumps(info, indent=2) + '\n').encode()
     common['catalog.json'] = source['provenance/component-catalog.json']
-    base = PREFIXES[component] + '-' + info['version'] + '-compat.2'
+    base = PREFIXES[component] + '-' + info['version'] + '-compat.2-' + package_revision
     artifacts = {}
     for action in ('install', 'rollback'):
         needed = set()
@@ -120,7 +131,7 @@ def package(component, output, payload_root=None):
             raise ValueError('Missing transition payloads: ' + str(sorted(needed - set(blobs))))
         content = {component + '/' + name: raw for name, raw in common.items()}
         content.update({component + '/blobs/' + value: blobs[value] for value in needed})
-        content.update({component + '/source/' + name: raw for name, raw in source.items()})
+        content.update({component + '/source/' + name: raw for name, raw in usb_source.items()})
         content['READ-ME-FIRST.txt'] = source['docs/USB-' + action.upper() + '.md']
         checks = ''.join("printf '%s  %s\\n' '" + sha(raw) + "' '" + component + '/' + name
                          + "' | /usr/bin/sha256sum --check --status\n" for name, raw in sorted(common.items()))
@@ -144,12 +155,16 @@ exec >> /usb_flash/COMMUNITY-LAUNCHER.log 2>&1
     (output / 'SHA256SUMS').write_text(''.join(sha(raw) + '  ' + name + '\n'
                                              for name, raw in sorted(artifacts.items())))
     result = dict(status='experimental-local-candidate', component=component, version=info['version'],
-                  compatibility_revision=2, source_files=len(source), component_files=len(files),
+                  compatibility_revision=2, package_revision=package_revision,
+                  source_files=len(source), usb_source_files=len(usb_source), component_files=len(files),
                   recognized_states=len(catalog['states']), public_usb_hardware_tested=False,
                   published=False, public_source_sha256={name: sha(raw) for name, raw in source.items()},
+                  usb_source_sha256={name: sha(raw) for name, raw in usb_source.items()},
+                  omitted_optional_documentation_images=sorted(set(source) - set(usb_source)),
                   outputs={name: dict(size=len(raw), sha256=sha(raw)) for name, raw in artifacts.items()})
     (output / 'RESULT.json').write_text(json.dumps(result, indent=2) + '\n')
-    print(json.dumps({key: value for key, value in result.items() if key != 'public_source_sha256'}, indent=2))
+    print(json.dumps({key: value for key, value in result.items()
+                      if key not in ('public_source_sha256', 'usb_source_sha256')}, indent=2))
     return result
 
 

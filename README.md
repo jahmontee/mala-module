@@ -1,12 +1,12 @@
 # Mala v2 for Hector · experimental public beta
 
 Granular textures based on Beads by Emilie Gillet / Mutable Instruments, for
-**Poly Effects Hector firmware 407**. The approved silver v2 interface adds
+**Poly Effects Hector firmware 407**. The silver v2 interface adds
 vertical knob gestures, a four-mode quality menu and live Shape envelope guide.
 
 ![Mala v2, rendered from its actual Qt5 source](docs/images/mala-v2.png)
 
-**0.2.0-beta.1 · USB compatibility revision2 is an experimental candidate.**
+**0.2.0-beta.1 · USB compatibility revision2 · packaging slim.1.**
 The UI was privately deployed and visually approved on Hector. These exact USB
 kits have computer-only testing and no physical USB trial. Read
 [validation](docs/VALIDATION.md) and [limitations](docs/KNOWN-LIMITATIONS.md).
@@ -69,3 +69,8 @@ personal presets and private recovery backups out of public reports. Read
 
 The [published beta.6](https://github.com/poly-hector/mala-module/releases/tag/v0.1.0-beta.6)
 remains available as its own historical release.
+
+The compact USB kits include complete program source, runtime graphics and
+license notices. Documentation images are omitted from those kits. The finished
+screenshot remains on GitHub and in the standalone source archive. Existing
+0.2.0-beta.1 installations need no reinstallation for this packaging revision.

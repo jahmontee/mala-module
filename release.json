@@ -34,5 +34,6 @@
   "interface_generation": 2,
   "base_dsp_version": "0.1.0-beta.6",
   "public_usb_hardware_tested": false,
-  "release_stage": "experimental-prerelease-candidate"
+  "release_stage": "experimental-prerelease-candidate",
+  "package_revision": "slim.1"
 }

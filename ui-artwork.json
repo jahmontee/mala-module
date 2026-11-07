@@ -1,29 +1,24 @@
 {
   "schema": "mala/artwork/1",
-  "mode": "built-in image_gen",
-  "reference": "docs/images/mala-v2-approved-concept.png",
+  "mode": "AI-generated runtime artwork",
   "assets": [
     {
       "file": "ui/qml/mala/assets/knob-body.png",
       "purpose": "Fixed knob body; a separate QML pointer tracks the live value.",
-      "prompt": "Use case: precise-object-edit.\nAsset type: ONE reusable production GUI knob artwork sprite with alpha transparency, for a real Qt touchscreen interface.\nImage 1 is the approved Mala interface concept. Extract/rebuild the exact material appearance of its large TIME knob as a single isolated reusable control. Match that knob very closely: thick sculpted black rubber grip, soft scallops rather than radial tick bars, large pale brushed-aluminum center cap, thin silver mounting ring, convincing fixed upper-left soft lighting and small contact shadow, straight-on orthographic view. The aluminum cap fills about 65% of the complete knob diameter. Keep the exact warm silver and deep black appearance from the reference.\nCrucial edit: REMOVE the white pointer stripe entirely, filling its place with the matching original underlying rubber and metal. The software adds its own moving pointer on top. No pointer, no white radial bars, no printed scale, no text, no surrounding panel, no badge, no extra objects.\nCentered tightly framed square sprite with a modest transparent margin of around 5% per side. Entire circle and contact shadow included, no cropping. Transparent background, never a checkerboard baked into the image. This is one component asset, not another screen redesign. Aim for a clean 512x512-style game/UI asset.",
       "bytes": 1601288,
       "sha256": "a5d0b21e50e17463b1299a7bb64407c330e13cc945d731db08978aef9f8a6e4b"
     },
     {
       "file": "ui/qml/mala/assets/silver-panel.png",
       "purpose": "Continuous textured silver panel behind the actual controls.",
-      "prompt": "Use case: precise-object-edit.\nAsset type: reusable GUI background texture for the approved Mala interface.\nImage 1 is the approved finished appearance. Recreate ONLY its continuous warm off-white brushed-silver panel surface, as a flat front-on 16:9 rectangle. Match the very fine aluminum grain and subtle creamy neutral silver tonal variation visible in the open panel areas. High-key soft even illumination, subtle horizontal brushing with fine material detail, barely perceptible variation, no strong highlights or shadows.\nRemove ALL knobs, controls, text, labels, decorative borders, icons, badges and lines. Absolutely no objects, gradients to black, logos, mounting holes, frame, vignetting or perspective. Edge to edge only the original pale silver surface. This is a texture asset for an actual coded interface, not a new design and not a screenshot. Landscape 1280x720-style texture.",
       "bytes": 1733192,
       "sha256": "97463f82691a5dd823c15994bdfb3d7bf8a65be007aff91b9e3c9f6ce457b91f"
     },
     {
       "file": "ui/qml/mala/assets/silver-button.png",
       "purpose": "Silver pushbutton face for Freeze, Seed, and the Latch indicator.",
-      "prompt": "Use case: precise-object-edit.\nAsset type: one reusable GUI silver pushbutton sprite with transparent background.\nUse the silver FREEZE button from the supplied approved Mala screen as the exact visual reference. Create one isolated round pushbutton face, viewed dead straight on: pale warm brushed-silver circular face, thin double metal rim, subtle warm grey outline, soft light from top-left, very restrained contact shadow below-right. Match the silver FREEZE / SEED buttons in the reference as closely as possible. Entire face and small shadow included, centered square component, around 8% transparent margin. No label, text, indicator light, pointer stripe, black rubber, badge, screw, background panel, frame, scale or other object. Truly transparent background. This is an image sprite to insert into a working interface, not another interface illustration.",
       "bytes": 688818,
       "sha256": "2eee4b60256d20bb2365a3e8f9e21cc75744cea3dca90c6a5c85b0038961287b"
     }
-  ],
-  "reference_sha256": "9f8d41348c6980a8c9c418f88f72f37b01f930dffca2aa2769a5cdff1da50d36"
+  ]
 }

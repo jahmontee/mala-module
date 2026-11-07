@@ -28,3 +28,8 @@ review-time tooling for this release identity, not an automatic future merger.
 For Qt5 checks use Python3.10/PySide2 5.15 or an equivalent development runtime,
 then run tools/qt_check.py --fresh --v2 with an offscreen software backend.
 These development dependencies are not installed on Hector by the USB kit.
+
+Packaging slim.1 excludes docs/images pictures from the USB source copy.
+All build inputs, runtime graphics and notices are retained. The standalone
+source archive includes the finished screenshot. Archive verification checks
+the exact filtered USB source set and the complete source archive separately.

@@ -1,11 +1,11 @@
-# USB rollback and recovery · Mala v2 0.2.0-beta.1 · compat.2
+# USB rollback and recovery · Mala v2 0.2.0-beta.1 · compat.2 · slim.1
 
 Experimental candidate. This exact rollback kit has no physical trial.
 Read COMPATIBILITY.md and back up wanted patches before removal.
 
 ## Remove Mala
 
-1. Download mala-hector-0.2.0-beta.1-compat.2-usb-rollback.zip and compare its
+1. Download mala-hector-0.2.0-beta.1-compat.2-slim.1-usb-rollback.zip and compare its
    SHA256SUMS entry from the same release.
 2. Extract the complete ZIP onto a dedicated, single-partition FAT32 drive.
    debug.sh, mala/ and READ-ME-FIRST.txt must be at the root. Use one kit per
@@ -38,3 +38,7 @@ repeating automatically. Follow the result to acknowledge once with the
 opposite kit, then deliberately choose your next action. Unknown later edits
 stop recovery rather than being overwritten. **RECOVERY REQUIRED** needs
 maintainer attention. USB recovery of an unbootable device is unqualified.
+
+Packaging slim.1 retains the same installer, DSP and runtime graphics.
+Documentation images are omitted from the USB source copy. The current
+screenshot is available on GitHub.

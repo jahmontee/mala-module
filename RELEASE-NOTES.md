@@ -1,27 +1,20 @@
-# Mala v2 · 0.2.0-beta.1 · compatibility revision2
+# Mala v2 · 0.2.0-beta.1 · compact USB packaging
 
-Experimental public-beta candidate for Hector 407. Beads-inspired silver
-interface, vertical knob movement, four-mode quality menu/LED, live Shape
-envelope, yellow Freeze/Seed/Latch lights and centered Mono Buffer layout.
+For Hector firmware 407. Packaging revision slim.1 provides smaller install
+and rollback downloads while retaining the same Mala DSP, interface, module
+identity, 58 ports, defaults and saved-state format. Existing 0.2.0-beta.1 users
+need no reinstallation for this packaging-only change.
 
-Fresh Feedback/Reverb start at 0%, Dry/Wet at 50%, other knobs at noon.
-Density at noon stops automatic grains. Existing saved values, DSP, URI,
-58 ports and saved-state format are retained.
+Use the matching compat.2-slim.1 USB install and rollback ZIPs with SHA256SUMS.
+Keep USB connected through the automatic normal reboot, then remove it after
+startup and check MALA-RESULT.txt. Follow [USB installation](docs/USB-INSTALL.md)
+and [rollback/recovery](docs/USB-ROLLBACK.md).
 
-Recognized public beta.6 updates in place, with authenticated recovery backups.
-This release distributes Mala only. See [compatibility](docs/COMPATIBILITY.md)
-for firmware admission, saved-patch continuity and update/removal behavior.
+Program source, runtime artwork and notices remain in the USB kits. The finished
+screenshot remains on GitHub. Read [compatibility](docs/COMPATIBILITY.md),
+[validation](docs/VALIDATION.md) and [limitations](docs/KNOWN-LIMITATIONS.md).
+These exact USB kits have computer-only validation and no physical Hector trial.
 
-Download matching install, rollback and SHA256SUMS. Follow
-[USB installation](docs/USB-INSTALL.md). Keep USB connected through the automatic
-reboot, then remove it and check MALA-RESULT.txt. Rollback removes Mala while
-restoring the recognized shared UI state. Completed-version downgrade is separate.
-
-**This exact v2 USB family has no physical install/reboot/rollback trial.**
-Private v2 UI use and earlier beta.6 USB testing are separate evidence.
-Computer-only preparation is documented in [validation](docs/VALIDATION.md).
-Read [limitations](docs/KNOWN-LIMITATIONS.md) before volunteering to test.
-
-Original Beads by Emilie Gillet / Mutable Instruments and upstream contributors.
-Hector adaptation/testing by jahmontee / Poly Hector, with AI development
-assistance from OpenAI Codex. Independent community project.
+Original Beads by Emilie Gillet / Mutable Instruments and credited upstream
+contributors. Hector adaptation/testing by jahmontee / Poly Hector, with
+AI development assistance from OpenAI Codex. Independent community project.

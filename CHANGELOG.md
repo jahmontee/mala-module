@@ -1,3 +1,9 @@
+# 0.2.0-beta.1 · packaging slim.1
+
+Compact USB install and rollback archives. Program source, runtime graphics,
+notices and on-device behavior are retained. Existing installations need no
+reinstallation.
+
 # 0.2.0-beta.1 · compatibility revision2
 
 Approved v2 interface, defaults, quality/LEDs, envelope and Mono Buffer layout.
