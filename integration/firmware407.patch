@@ -1,0 +1,288 @@
+--- a/show_widget.py
++++ b/show_widget.py
+@@ -1,5 +1,6 @@
+ import sys, time, json, os.path, os, subprocess, queue, threading, traceback, glob
+ import shutil
++from mala_407 import MalaHub
+ os.environ["QT_IM_MODULE"] = "qtvirtualkeyboard"
+ from signal import signal, SIGINT, SIGTERM
+ from time import sleep
+@@ -521,6 +522,7 @@
+ def load_preset(name, initial=False, force=False):
+     if is_loading.value == True and not force:
+         return
++    mala_hub.begin_load()
+     is_loading.value = True
+     global preset_started_loading_time
+     preset_started_loading_time = time.perf_counter()
+@@ -579,6 +581,7 @@
+                 "assigned_footswitch": PolyStr(""),
+                 "broadcast_ports" : broadcast_ports,
+                 "enabled": PolyBool(is_enabled)}
++        mala_hub.created(effect_name)
+         # insert in context or model? 
+         # emit add signal
+         context.setContextProperty("currentEffects", current_effects) # might be slow
+@@ -600,6 +603,7 @@
+     debug_print("### from backend removing effect, is effect_name in effects", effect_name)
+     if effect_name not in current_effects:
+         return
++    mala_hub.retire(effect_name)
+     effect_type = current_effects[effect_name]["effect_type"]
+     debug_print("### from backend removing effect")
+ 
+@@ -634,6 +638,7 @@
+     ingen_wrapper.get_state("/engine")
+     # debug_print("### from backend removing effect setting portConnections")
+     update_counter.value+=1
++    mala_hub.topology_changed()
+ 
+ def from_backend_add_connection(head, tail):
+     debug_print("head ", head, "tail", tail, sub_graphs)
+@@ -692,6 +697,7 @@
+     # global context
+     context.setContextProperty("portConnections", port_connections)
+     update_counter.value+=1
++    mala_hub.topology_changed()
+ 
+ 
+ def from_backend_disconnect(head, tail):
+@@ -727,6 +733,7 @@
+     # global context
+     context.setContextProperty("portConnections", port_connections)
+     update_counter.value+=1
++    mala_hub.topology_changed()
+ 
+ def get_meta_from_files(initial=False):
+     r_dict = {}
+@@ -910,6 +917,8 @@
+                 ingen_wrapper.add_loop_midi_out(effect_name, 900, 150)
+             # ingen_wrapper.add_input("/main/in_"+str(i), x=1192, y=(80*i))
+         else:
++            if effect_type == "mala":
++                mala_hub.expect_new(effect_name)
+             ingen_wrapper.add_plugin(effect_name, effect_type_map[effect_type])
+         # from_backend_new_effect(effect_name, effect_type)
+ 
+@@ -2001,6 +2010,7 @@
+                     # debug_print("message starts with ingen:", m)
+                     m[1] = m[1].removeprefix("ingen:")
+ 
++            mala_hub.readback(m)
+             # debug_print("got ui message", m)
+             if m[0] == "value_change":
+                 # debug_print("got value change in process_ui")
+@@ -2185,6 +2195,7 @@
+                     pass
+     except queue.Empty:
+         pass
++    mala_hub.flush()
+ 
+ 
+ 
+@@ -2364,6 +2375,8 @@
+     # Expose the object to QML.
+     # global context
+     context = engine.rootContext()
++    mala_hub = MalaHub(current_effects, port_connections, knobs, ingen_wrapper, is_loading, hardware=current_pedal_model.name)
++    context.setContextProperty("malaHub", mala_hub)
+     context.setContextProperty("knobs", knobs)
+     context.setContextProperty("loopler", loopler)
+     context.setContextProperty("module_browser_model", module_browser_model_s)
+--- a/module_info.py
++++ b/module_info.py
+@@ -3748,3 +3748,11 @@
+ #                                         'WETDRY': ['Wet/Dry Mix', 0.7, 0.0, 1.0]},
+ #                            'inputs': {'INPUT': ['Audio In', 'AudioPort']},
+ #                            'outputs': {'OUTPUT': ['Audio Out', 'AudioPort']}},
++
++# Mala is registered before module_browser_model snapshots this catalog.
++import json as _mala_json
++from pathlib import Path as _MalaPath
++from mala_407 import prototype as _mala_prototype
++_mala_entry = _mala_json.loads((_MalaPath(__file__).parent / "mala-entry.json").read_text())
++effect_prototypes_models_all["mala"] = _mala_prototype(_mala_entry)
++effect_type_maps["beebo"]["mala"] = _mala_entry["uri"]
+--- a/ingen_wrapper.py
++++ b/ingen_wrapper.py
+@@ -316,7 +316,7 @@
+ 
+ def load_pedalboard(name, current_sub_graph):
+     # print("loading pedalboard", name)
+-    q.put((ingen.copy, name, current_sub_graph))
++    q.put((_mala_begin_load, name, current_sub_graph))
+     # q.put((ingen.copy, name, "/main"))
+ 
+ def set_broadcast(port, is_broadcast):
+@@ -488,7 +488,19 @@
+     else:
+         return False
+ 
++def _mala_begin_load(name, graph):
++    global _mala_restorer
++    if "_mala_restorer" not in globals():
++        from mala_restore import MalaLoadRestore
++        _mala_restorer = MalaLoadRestore(ingen, q, ui_queue)
++    _mala_restorer.load(name, graph)
++
++def _mala_restore_message(message):
++    restorer = globals().get("_mala_restorer")
++    return restorer.handle(message) if restorer is not None else False
++
+ def parse_ingen(to_parse):
++    if _mala_restore_message(to_parse): return
+     # try:
+     # if True:
+         # print("parsing", to_parse)
+@@ -557,6 +569,8 @@
+                     ir = body[ir_url][0]
+                 if ingen_enabled in body:
+                     is_enabled = body[ingen_enabled][0] != "false"
++                    if plugin == "urn:beebo-hector-lab:mala-preview":
++                        is_enabled = body[ingen_enabled][0] not in (False, "false", 0, "0")
+                     # print("## is enabled", is_enabled)
+                 # print("x", x, "y", y, "plugin", plugin, "subject", subject)
+                 ui_queue.put(("add_plugin", subject, plugin, x, y, is_enabled))
+--- a/qml/PatchBayEffect.qml
++++ b/qml/PatchBayEffect.qml
+@@ -13,7 +13,7 @@
+ //
+ import "polyconst.js" as Constants
+ import "plaits_names.js" as PlaitsNames
+-import "module_info.js" as ModuleInfo
++import "mala/catalog.js" as ModuleInfo
+ 
+ Rectangle {
+     id: rect
+@@ -240,6 +240,11 @@
+         patch_bay.currentMode = PatchBay.Details;
+ 		title_text = effect_type.replace(/_/g, " ")
+ 
++        if (effect_type === "mala") {
++            patchStack.push("mala/FirmwarePanel.qml", {"effect_id":effect_id});
++            patch_bay.current_help_text = "";
++            return;
++        }
+         if (effect_type == "stereo_EQ" || effect_type == "mono_EQ"){
+             patchStack.push("EQWidget.qml", {"effect": effect_id});
+             patch_bay.current_help_text = Constants.help["eq_detail"];
+--- a/qml/TitleFooter.qml
++++ b/qml/TitleFooter.qml
+@@ -289,7 +289,7 @@
+         y: 645
+         width: 1280
+         height: 80
+-        visible: !Qt.inputMethod.visible
++        visible: !Qt.inputMethod.visible && !(patchStack.currentItem && patchStack.currentItem.malaFullPanel === true)
+         // border { width:2; color: "white"}
+         IconButton {
+ 
+--- a/qml/ModuleBrowser.qml
++++ b/qml/ModuleBrowser.qml
+@@ -10,6 +10,8 @@
+     height: 720
+     width:1280
+     property bool showing_fav: false
++    property var patch_single: mainStack.get(0).patch_single
++    property bool malaCommitted: false
+ 
+     Rectangle {
+         x: 21
+@@ -202,7 +204,7 @@
+                         y: 17
+                         height: 30
+                         width: 598
+-                        text: l_effect.replace(/_/g, " ")
++                        text: l_effect === "mala" ? "Mala" : l_effect.replace(/_/g, " ")
+                         // anchors.top: parent.top
+                         font {
+                             pixelSize: 30
+@@ -215,12 +217,12 @@
+                         x: 31
+                         y: 55
+                         width: 750
+-                        height: 30
+-                        text: description 
++                        height: l_effect === "mala" ? 90 : 30
++                        text: l_effect === "mala" ? "Granular texture processor based on Mutable Instruments Beads, with four recording qualities, CV modulation, Seed and Freeze.\nBeads: Emilie Gillet / Mutable Instruments. Mala: Beebo / Hector Lab contributors." : description
+                         wrapMode: Text.Wrap
+                         // anchors.top: parent.top
+                         font {
+-                            pixelSize: 26
++                            pixelSize: l_effect === "mala" ? 18 : 26
+                             family: docFont.name
+                             weight: Font.Normal
+                             // capitalization: Font.AllUppercase
+@@ -254,7 +256,17 @@
+                     MouseArea {
+                         anchors.fill: parent
+                         onClicked: {
++                            if (l_effect === "mala") {
++                                if (addEffectCon.malaCommitted) return;
++                                addEffectCon.malaCommitted = true;
++                            }
+                             knobs.add_new_effect(l_effect)
++                            if (l_effect === "mala") {
++                                // Finish context-dependent work before pop destroys this delegate.
++                                patch_single.current_help_text = Constants.help["move"];
++                                mainStack.pop(null);
++                                return;
++                            }
+                             // knobs.ui_add_effect(l_effect)
+                             mainStack.pop(null)
+                             // patch_single.currentMode = PatchBay.Move;
+--- a/qml/PatchBay.qml
++++ b/qml/PatchBay.qml
+@@ -6,7 +6,7 @@
+ import QtQuick.VirtualKeyboard 2.1
+ 
+ import "polyconst.js" as Constants
+-import "module_info.js" as ModuleInfo
++import "mala/catalog.js" as ModuleInfo
+ /*
+  * connection pairs of id / port, id / port
+  *
+--- a/qml/ValueButtonsSlider.qml
++++ b/qml/ValueButtonsSlider.qml
+@@ -3,7 +3,7 @@
+ import QtQuick.Controls 2.4
+ import QtQuick.Controls.Material 2.4
+ import "../qml/polyconst.js" as Constants
+-import "module_info.js" as ModuleInfo
++import "mala/catalog.js" as ModuleInfo
+ 
+ Item { 
+ 	id: control
+--- a/qml/MultiValueButtonsSlider.qml
++++ b/qml/MultiValueButtonsSlider.qml
+@@ -3,7 +3,7 @@
+ import QtQuick.Controls 2.4
+ import QtQuick.Controls.Material 2.4
+ import "../qml/polyconst.js" as Constants
+-import "module_info.js" as ModuleInfo
++import "mala/catalog.js" as ModuleInfo
+ 
+ Item { 
+ 	id: control
+--- a/qml/ModuleMore.qml
++++ b/qml/ModuleMore.qml
+@@ -3,7 +3,7 @@
+ import QtQuick.Controls 2.4
+ import QtQuick.Controls.Material 2.4
+ import "../qml/polyconst.js" as Constants
+-import "module_info.js" as ModuleInfo
++import "mala/catalog.js" as ModuleInfo
+ 
+ Item {
+     height:540
+--- a/qml/Spotlight.qml
++++ b/qml/Spotlight.qml
+@@ -3,7 +3,7 @@
+ import QtQuick.Controls 2.4
+ import QtQuick.Controls.Material 2.4
+ import "../qml/polyconst.js" as Constants
+-import "module_info.js" as ModuleInfo
++import "mala/catalog.js" as ModuleInfo
+ 
+ Item {
+     height:720

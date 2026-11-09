@@ -1,0 +1,7 @@
+Mala is a mixed-license source distribution.
+
+Mala DSP adapter, authored UI/Python and installer: MIT (LICENSES/MIT-Mala.txt).
+Beads/stmlib and LV2 headers: their per-file MIT/permissive notices.
+Hector digit_ui modifications: distributed under GPL version 3; upstream states GPL without a version. See COPYING and LICENSES/digit-ui-statement.txt.
+The Material Slider derivative uses Qt's GPL-2.0-or-later option under GPL version 3, with the complete original notice retained.
+These terms permit forks and contributions, subject to each component's license. See docs/LICENSING.md.

@@ -1,0 +1,6 @@
+Mala Preview: derived from Beads by Emilie Gillet.
+eurorack d8f473915232af74347762b6365202bfd26f73f6
+stmlib e3bd7c9cc00e4364166f9905c0509b6ffd0535ec
+Original source files unchanged. Separate overlay: thread-local RNG storage;
+skip an unused zero-weight read at wavetable grain endpoints.
+New LV2 adapter and Qt editor: Beebo / Hector Lab, MIT.

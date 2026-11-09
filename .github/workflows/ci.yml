@@ -1,0 +1,20 @@
+name: Source and installer checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build portable DSP
+        run: python3 tools/build.py
+      - name: Test DSP and disposable installer fixtures
+        run: python3 -m unittest discover -s tests -v
+      - name: Audit public export and corresponding source
+        run: python3 tools/audit.py
