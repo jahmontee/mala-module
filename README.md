@@ -1,5 +1,9 @@
 # Mala for Hector — public beta
 
+> The newer **[Mala v2 Public Beta](https://github.com/jahmontee/mala-module/releases/tag/v0.2.0-beta.1)** has its own
+> [README](https://github.com/jahmontee/mala-module/blob/v0.2.0-beta.1/README.md) and USB kits.
+> The instructions on this page apply to **Mala v0.1.0-beta.6**.
+
 Mala is a community granular texture processor for **Hector running firmware 407**,
 based on the open-source Beads algorithms by Emilie Gillet / Mutable Instruments.
 It includes four recording qualities, Freeze and Seed, CV modulation, wavetable
@@ -16,7 +20,7 @@ unchanged from the private beta.5.
 No SSH, terminal, network connection, or SD-card removal is required for normal
 installation or rollback. Use a dedicated, single-partition FAT32 thumb drive.
 
-1. Download `mala-hector-0.1.0-beta.6-usb-install.zip` from this repository's Releases.
+1. Download `mala-hector-0.1.0-beta.6-usb-install.zip` from the [Mala beta.6 release](https://github.com/jahmontee/mala-module/releases/tag/v0.1.0-beta.6).
 2. Follow the [USB installation instructions](docs/USB-INSTALL.md): extract the
    kit directly onto the thumb drive, save your patch, and start Hector with it inserted.
 3. The kit checks compatibility, retains originals on Hector, applies Mala and
