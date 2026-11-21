@@ -52,7 +52,7 @@ class RateConverter {
       beads::FloatFrame value{0, 0};
       unsigned age = 0;
       for (unsigned tap = time % up_; tap < kFilterLength; tap += up_, ++age) {
-        const auto& sample = history_[(head_ + kFilterLength - 1 - age) % kFilterLength];
+        const auto& sample = history_[head_ + kFilterLength - 1 - age];
         value.l += coefficients_[tap] * sample.l;
         value.r += coefficients_[tap] * sample.r;
       }
@@ -66,8 +66,12 @@ class RateConverter {
   float coefficient(unsigned i) const { return coefficients_[i]; }
  private:
   static unsigned gcd(unsigned a, unsigned b) { while (b) { unsigned r = a % b; a = b; b = r; } return a; }
-  void Push(beads::FloatFrame value) { history_[head_] = value; head_ = (head_ + 1) % kFilterLength; }
-  beads::FloatFrame history_[kFilterLength];
+  void Push(beads::FloatFrame value) {
+    history_[head_] = history_[head_ + kFilterLength] = value;
+    if (++head_ == kFilterLength) head_ = 0;
+  }
+  // Mirrored history removes modulo from every FIR tap, preserving tap order.
+  beads::FloatFrame history_[2 * kFilterLength];
   float coefficients_[kFilterLength];
   unsigned up_, down_, head_;
   bool bypass_;

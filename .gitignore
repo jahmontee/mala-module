@@ -1,8 +1,0 @@
-build/
-dist/
-artifacts/
-__pycache__/
-*.pyc
-*.log
-MALA-RESULT.txt
-MALA-LAUNCHER.log

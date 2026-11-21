@@ -334,7 +334,11 @@ class DelayLine {
     if (interpolation == INTERPOLATION_HERMITE) {
       delay_integral += max_delay - 1; // Fix latency.
     }
-    int i = (write_ptr_ + delay_integral) % max_delay;
+    int i = write_ptr_ + delay_integral;
+    // Most reads span fewer than three ring lengths, including the Hermite offset.
+    if (i >= max_delay) i -= max_delay;
+    if (i >= max_delay) i -= max_delay;
+    if (i < 0 || i >= max_delay) i %= max_delay;
     
     FloatFrame value;
     
